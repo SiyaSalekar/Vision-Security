@@ -1,11 +1,21 @@
-import json
 import cv2
 from flask import Flask, render_template
 import threading
+import os
+from flask_mysqldb import MySQL
+
 
 app = Flask(__name__)
 
+# database code
+app.config['MYSQL'] = 'localhost'
+app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
+app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
+app.config["MYSQL_DB"] = 'sd3a_registrants_23'
 
+mysql = MySQL(app)
+
+# database code endRegion
 # pubnub
 from pubnub.callbacks import SubscribeCallback
 from pubnub.enums import PNStatusCategory, PNOperationType
@@ -87,6 +97,12 @@ def qrcode():
             if data:
                 if data:
                     print("Found: ", data)
+
+                    # cursor = mysql.connection.cursor()
+                    # cursor.execute("insert into registrants(name, sport) values (%s, %s) ", (data, data))
+                    # mysql.connection.commit()
+                    # cursor.close()
+
                     return str(data)
 
         # Image preview
