@@ -1,19 +1,20 @@
 import cv2
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 import threading
 import os
+from livereload import Server
 from flask_mysqldb import MySQL
 
 
 app = Flask(__name__)
 
 # # database code
-# app.config['MYSQL'] = 'localhost'
-# app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
-# app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
-# app.config["MYSQL_DB"] = 'sd3a_registrants_23'
-#
-# mysql = MySQL(app)
+app.config['MYSQL'] = 'localhost'
+app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
+app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
+app.config["MYSQL_DB"] = 'vision_security'
+
+mysql = MySQL(app)
 
 # database code endRegion
 
@@ -70,11 +71,35 @@ app = Flask(__name__)
 #
 # # pubnub endRegion
 
-@app.route("/")
+# @app.route("/")
+# def index():
+#     return render_template("index.html")
+
+@app.route("/", methods = ["GET","POST"])
 def index():
-    return render_template("index.html")
+    if request.method == "GET":
+        return render_template("index.html")
+    elif request.method == "POST":
+        return render_template("greet.html", name=request.form.get("name", "World"))
 
 
+@app.route("/register",methods=["POST"])
+def register():
+    # if not request.form.get("name") or request.form.get("sport") not in SPORTS:
+    #     return render_template("failure.html")
+    # return render_template("success.html")
+    # if not request.form.get("name") or request.form.get("sport") not in SPORTS:
+    #     return render_template("failure.html")
+    # return render_template("success.html")
+    id = request.form.get("id")
+    name = request.form.get("student-name")
+    if not id:
+        return render_template("error.html", message="Invalid ID")
+    cursor = mysql.connection.cursor()
+    cursor.execute("insert into student(name, id) values (%s, %s) ", (name, id))
+    mysql.connection.commit()
+    cursor.close()
+    return redirect("/")
 
 @app.route("/qrgenerate")
 def qrscan():
@@ -96,6 +121,10 @@ def qrscan():
                         0.5, (0, 255, 0), 2)
             if data:
                 print("data found: ", data)
+                # cursor = mysql.connection.cursor()
+                # cursor.execute("insert into registrants(name, sport) values (%s, %s) ", (data, data))
+                # mysql.connection.commit()
+                # cursor.close()
                 return render_template("qr-code.html", someVariable=data)
 
         # display the image preview
@@ -127,7 +156,8 @@ def qrscan():
 
 if __name__ == '__main__':
     #app.run(host='192.168.43.136',port=9000)
-    app.run(debug=True)
+    server = Server(app.wsgi_app)
+    server.serve()
 
 
 
