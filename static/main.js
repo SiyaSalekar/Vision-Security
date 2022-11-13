@@ -1,5 +1,5 @@
 function generateCode(id) {
-fetch('/qrgenerate/id')
+fetch('/qrgenerate/')
 .then(response=>{
   id = document.getElementById('studentid').value
 })
