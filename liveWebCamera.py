@@ -1,8 +1,10 @@
+# install opencv required - pip install opencv-python
 import cv2
-from matplotlib import pyplot as plt
 
+# capture video
 cap = cv2.VideoCapture(0)
 
+# set frame
 while cap.isOpened():
     ret, frame = cap.read()
 
