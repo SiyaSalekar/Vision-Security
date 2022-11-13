@@ -1,17 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends "layout.html" %}
+{% block content %}
 
-    <title>Vision Security</title>
-    <link rel="shortcut icon" href="#">
-    <script src="static/main.js"></script>
-</head>
-<body>
-    <h1>Data: <span id="data_id">...</span></h1>
-    <script src="static/main.js"></script>
-</body>
-</html>
+<form method="GET" action="qrgenerate" xmlns="http://www.w3.org/1999/html">
+      <button/>Scan</button>
+</form>
+
+{% endblock %}
