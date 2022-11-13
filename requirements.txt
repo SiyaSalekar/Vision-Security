@@ -1,0 +1,5 @@
+Flask
+cv2
+Server
+MySQL
+os
