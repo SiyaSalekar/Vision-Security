@@ -1,48 +1,58 @@
+import json
 import cv2
-import RPi.GPIO as GPIO
-import time
+from flask import Flask, render_template
+import threading
 
-# set up the camera object
-cap = cv2.VideoCapture(0)
+app = Flask(__name__)
 
-# QR code detection object
-detector = cv2.QRCodeDetector()
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-while True:
-    # get the image
-    _, img = cap.read()
-    # fetch the bounding box co-ordinates and data
-    data, bboxcord, _ = detector.detectAndDecode(img)
+@app.route("/qrcode")
+def qrcode():
+    global data
+    # set up the camera object
+    cap = cv2.VideoCapture(0)
 
-    # draw bounding box along with the data
-    if (bboxcord is not None):
+    # QR code detection object
+    detector = cv2.QRCodeDetector()
 
-        cv2.putText(img, data, (int(bboxcord[0][0][0]), int(bboxcord[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5, (0, 255, 0), 2)
-        if data:
-            print("Found: ", data)
+    while True:
+        # get the image
+        _, img = cap.read()
+        # fetch the bounding box co-ordinates and data
+        data, bboxcord, _ = detector.detectAndDecode(img)
 
-            # LED Setup
-            GPIO.setmode(GPIO.BOARD)
-            GPIO.setup(8, GPIO.OUT)
+        # draw bounding box along with the data
+        if (bboxcord is not None):
 
-            # control LED when data received set output to HIGH
-            for i in range(0,2):
-                GPIO.output(8, True)
-                time.sleep(0.5)
-                GPIO.output(8, False)
-                time.sleep(0.5)
-            GPIO.cleanup()
+            cv2.putText(img, data, (int(bboxcord[0][0][0]), int(bboxcord[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
+                        0.5, (0, 255, 0), 2)
 
-    # Image preview
-    cv2.imshow("Image", img)
+            if data:
+                if data:
+                    print("Found: ", data)
+                    return str(data)
 
-    if (cv2.waitKey(1) == ord("q")):
-        break
+        # Image preview
+        cv2.imshow("Image", img)
 
-# free camera object and exit
-cap.release()
-cv2.destroyAllWindows()
+        if (cv2.waitKey(1) == ord("q")):
+            break
+
+    # free camera object and exit
+    cap.release()
+    cv2.destroyAllWindows()
+
+
+
+
+if __name__ == '__main__':
+    #app.run(host='192.168.43.136',port=9000)
+    sensors_thread = threading.Thread(target=qrcode)
+    sensors_thread.start()
+    app.run(debug=True)
 
 
 
