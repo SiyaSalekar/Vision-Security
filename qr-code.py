@@ -4,6 +4,8 @@ import os
 from livereload import Server
 from flask_mysqldb import MySQL
 import bcrypt
+import qrcode
+from IPython import display
 
 
 app = Flask(__name__)
@@ -91,6 +93,15 @@ def register():
     password = bcrypt.hashpw(passwd, bcrypt.gensalt())
     password_store = str(password)
 
+    qr = qrcode.QRCode(version=1,
+                       error_correction=qrcode.constants.ERROR_CORRECT_M,
+                       box_size=10, border=4)
+    qr.add_data(password_store)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color='black', back_color='white')
+    img.save(f"templates/images/{name}.png")
+    imgdisplay = display.Image(f"templates/images/{name}.png")
+
     if not student_id:
         return render_template("error.html", message="Invalid ID")
     if not name:
@@ -100,7 +111,7 @@ def register():
     cursor.execute("insert into student(name, student_id, password) values (%s, %s, %s) ", (name, student_id, password_store))
     mysql.connection.commit()
     cursor.close()
-    return redirect("/")
+    return redirect("/",QRImage=imgdisplay)
 
 @app.route("/qrgenerate")
 def qrscan():
@@ -131,9 +142,9 @@ def qrscan():
                     return render_template("qr-code.html", someVariable="Invalid")
                 else:
                     if fetched_data[0] == data:
-                        print("data found: ", data)
+                        print("data Valid")
                         cursor.close()
-                        return render_template("qr-code.html", someVariable=data)
+                        return render_template("qr-code.html", someVariable="Valid")
 
 
         # display the image preview
@@ -148,18 +159,6 @@ def qrscan():
 
 
 
-# generate QR code
-# @app.route('/qrgenerate/studentID')
-# def generateCode(studentID):
-#     qr = qrcode.QRCode(version=1,
-#                        error_correction=qrcode.constants.ERROR_CORRECT_M,
-#                        box_size=10,border=4)
-#     qr.add_data(studentID)
-#     qr.make(fit=True)
-#     img = qr.make_image(fill_color='green', back_color = 'white')
-#     img.save(f"templates/images/{studentID}.png")
-#     return render_template("index.html")
-# endRegion generate QR code
 
 
 
