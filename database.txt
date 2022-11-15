@@ -1,0 +1,7 @@
+CREATE DATABASE `vision_security`;
+
+CREATE TABLE student(id int NOT NULL AUTO_INCREMENT,
+             name VARCHAR(50),
+			 student_id VARCHAR(50) unique,
+			 password VARCHAR(100) unique,
+			 PRIMARY KEY (id));

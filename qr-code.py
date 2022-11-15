@@ -5,7 +5,6 @@ from livereload import Server
 from flask_mysqldb import MySQL
 import bcrypt
 import qrcode
-from IPython import display
 
 
 app = Flask(__name__)
@@ -28,8 +27,8 @@ mysql = MySQL(app)
 #
 # pnconfig = PNConfiguration()
 #
-# pnconfig.subscribe_key = 'sub-c-babca055-8ae8-4cbb-87e3-d1927bc7826a'
-# pnconfig.publish_key = 'pub-c-7b7bf3ef-a5df-4ec8-9bb2-f70cc90f6c86'
+# pnconfig.subscribe_key = ''
+# pnconfig.publish_key = ''
 # pnconfig.user_id = "siya-machine"
 # pubnub = PubNub(pnconfig)
 #
@@ -100,7 +99,6 @@ def register():
     qr.make(fit=True)
     img = qr.make_image(fill_color='black', back_color='white')
     img.save(f"templates/images/{name}.png")
-    imgdisplay = display.Image(f"templates/images/{name}.png")
 
     if not student_id:
         return render_template("error.html", message="Invalid ID")
@@ -111,7 +109,7 @@ def register():
     cursor.execute("insert into student(name, student_id, password) values (%s, %s, %s) ", (name, student_id, password_store))
     mysql.connection.commit()
     cursor.close()
-    return redirect("/",QRImage=imgdisplay)
+    return redirect("/")
 
 @app.route("/qrgenerate")
 def qrscan():

@@ -3,3 +3,6 @@ cv2
 Server
 MySQL
 os
+bcrypt
+qrcode
+livereload
