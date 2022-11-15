@@ -1,6 +1,5 @@
 import cv2
 from flask import Flask, render_template, request, redirect
-import threading
 import os
 from livereload import Server
 from flask_mysqldb import MySQL
@@ -12,7 +11,7 @@ app = Flask(__name__)
 app.config['MYSQL'] = 'localhost'
 app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
 app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
-app.config["MYSQL_DB"] = 'vision_security'
+app.config["MYSQL_DB"] = 'vision-security'
 
 mysql = MySQL(app)
 
@@ -91,12 +90,16 @@ def register():
     # if not request.form.get("name") or request.form.get("sport") not in SPORTS:
     #     return render_template("failure.html")
     # return render_template("success.html")
-    id = request.form.get("id")
-    name = request.form.get("student-name")
-    if not id:
+    student_id = request.form.get("student_id")
+    name = request.form.get("student_name")
+
+    if not student_id:
         return render_template("error.html", message="Invalid ID")
+    if not name:
+        return render_template("error.html", message="Enter Name")
+
     cursor = mysql.connection.cursor()
-    cursor.execute("insert into student(name, id) values (%s, %s) ", (name, id))
+    cursor.execute("insert into student(name, student_id) values (%s, %s) ", (name, student_id))
     mysql.connection.commit()
     cursor.close()
     return redirect("/")
@@ -120,19 +123,36 @@ def qrscan():
             cv2.putText(img, data, (int(bbox[0][0][0]), int(bbox[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
                         0.5, (0, 255, 0), 2)
             if data:
-                print("data found: ", data)
-                # cursor = mysql.connection.cursor()
-                # cursor.execute("insert into registrants(name, sport) values (%s, %s) ", (data, data))
-                # mysql.connection.commit()
-                # cursor.close()
+                cursor = mysql.connection.cursor()
+                cursor.execute("select student_id from student where student_id = %s", [data])
+
+                for row in cursor:
+                    if row == data:
+                        print("data found: ", data)
+                        # cursor = mysql.connection.cursor()
+                        # cursor.execute("insert into registrants(name, sport) values (%s, %s) ", (data, data))
+                        # mysql.connection.commit()
+                        # cursor.close()
+
+
+                mysql.connection.commit()
+                cursor.close()
+
                 return render_template("qr-code.html", someVariable=data)
+
+                # print("data found: ", data)
+                # # cursor = mysql.connection.cursor()
+                # # cursor.execute("insert into registrants(name, sport) values (%s, %s) ", (data, data))
+                # # mysql.connection.commit()
+                # # cursor.close()
+                # return render_template("qr-code.html", someVariable=data)
 
         # display the image preview
         cv2.imshow("code detector", img)
         if (cv2.waitKey(1) == ord("q")):
             break
 
-        # free camera object and exit
+    # free camera object and exit
     cap.release()
     cv2.destroyAllWindows()
 
