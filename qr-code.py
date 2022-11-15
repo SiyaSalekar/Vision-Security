@@ -3,11 +3,12 @@ from flask import Flask, render_template, request, redirect
 import os
 from livereload import Server
 from flask_mysqldb import MySQL
+import bcrypt
 
 
 app = Flask(__name__)
 
-# # database code
+# # database connect
 app.config['MYSQL'] = 'localhost'
 app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
 app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
@@ -15,7 +16,7 @@ app.config["MYSQL_DB"] = 'vision-security'
 
 mysql = MySQL(app)
 
-# database code endRegion
+# database connect endRegion
 
 # # pubnub
 # from pubnub.callbacks import SubscribeCallback
@@ -25,9 +26,9 @@ mysql = MySQL(app)
 #
 # pnconfig = PNConfiguration()
 #
-# pnconfig.subscribe_key = 'mySubscribeKey'
-# pnconfig.publish_key = 'myPublishKey'
-# pnconfig.user_id = "my_custom_user_id"
+# pnconfig.subscribe_key = 'sub-c-babca055-8ae8-4cbb-87e3-d1927bc7826a'
+# pnconfig.publish_key = 'pub-c-7b7bf3ef-a5df-4ec8-9bb2-f70cc90f6c86'
+# pnconfig.user_id = "siya-machine"
 # pubnub = PubNub(pnconfig)
 #
 # def my_publish_callback(envelope, status):
@@ -51,7 +52,7 @@ mysql = MySQL(app)
 #             # Connect event. You can do stuff like publish, and know you'll get it.
 #             # Or just use the connected event to confirm you are subscribed for
 #             # UI / internal notifications, etc
-#             pubnub.publish().channel('my_channel').message('Hello world!').pn_async(my_publish_callback)
+#             pubnub.publish().channel('siyas-channel').message('Hello world!').pn_async(my_publish_callback)
 #         elif status.category == PNStatusCategory.PNReconnectedCategory:
 #             pass
 #             # Happens as part of our regular operation. This event happens when
@@ -66,12 +67,9 @@ mysql = MySQL(app)
 #         print(message.message)
 #
 # pubnub.add_listener(MySubscribeCallback())
-# pubnub.subscribe().channels('my_channel').execute()
+#
+# pubnub.subscribe().channels('siyas-channel').execute()
 # pubnub endRegion
-
-# @app.route("/")
-# def index():
-#     return render_template("index.html")
 
 @app.route("/", methods = ["GET","POST"])
 def index():
@@ -86,6 +84,12 @@ def register():
 
     student_id = request.form.get("student_id")
     name = request.form.get("student_name")
+    #convert passwd to bytes
+    passwd = request.form.get("password").encode()
+
+    #hashing password
+    password = bcrypt.hashpw(passwd, bcrypt.gensalt())
+    password_store = str(password)
 
     if not student_id:
         return render_template("error.html", message="Invalid ID")
@@ -93,7 +97,7 @@ def register():
         return render_template("error.html", message="Enter Name")
 
     cursor = mysql.connection.cursor()
-    cursor.execute("insert into student(name, student_id) values (%s, %s) ", (name, student_id))
+    cursor.execute("insert into student(name, student_id, password) values (%s, %s, %s) ", (name, student_id, password_store))
     mysql.connection.commit()
     cursor.close()
     return redirect("/")
@@ -119,7 +123,7 @@ def qrscan():
                         0.5, (0, 255, 0), 2)
             if data:
                 cursor = mysql.connection.cursor()
-                cursor.execute("select student_id from student where student_id = %s", [data])
+                cursor.execute("select password from student where password = %s", [data])
                 fetched_data = cursor.fetchone()
 
                 if fetched_data is None:
@@ -130,8 +134,6 @@ def qrscan():
                         print("data found: ", data)
                         cursor.close()
                         return render_template("qr-code.html", someVariable=data)
-
-
 
 
         # display the image preview
