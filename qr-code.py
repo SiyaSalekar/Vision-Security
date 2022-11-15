@@ -19,7 +19,7 @@ mysql = MySQL(app)
 
 # # pubnub
 # from pubnub.callbacks import SubscribeCallback
-# from pubnub.enums import PNStatusCategory, PNOperationType
+# from pubnub.enums import PNStatusCategory
 # from pubnub.pnconfiguration import PNConfiguration
 # from pubnub.pubnub import PubNub
 #
@@ -67,8 +67,7 @@ mysql = MySQL(app)
 #
 # pubnub.add_listener(MySubscribeCallback())
 # pubnub.subscribe().channels('my_channel').execute()
-#
-# # pubnub endRegion
+# pubnub endRegion
 
 # @app.route("/")
 # def index():
@@ -84,12 +83,7 @@ def index():
 
 @app.route("/register",methods=["POST"])
 def register():
-    # if not request.form.get("name") or request.form.get("sport") not in SPORTS:
-    #     return render_template("failure.html")
-    # return render_template("success.html")
-    # if not request.form.get("name") or request.form.get("sport") not in SPORTS:
-    #     return render_template("failure.html")
-    # return render_template("success.html")
+
     student_id = request.form.get("student_id")
     name = request.form.get("student_name")
 
@@ -106,6 +100,7 @@ def register():
 
 @app.route("/qrgenerate")
 def qrscan():
+    global data
     # set up camera object
     cap = cv2.VideoCapture(0)
 
@@ -125,27 +120,19 @@ def qrscan():
             if data:
                 cursor = mysql.connection.cursor()
                 cursor.execute("select student_id from student where student_id = %s", [data])
+                fetched_data = cursor.fetchone()
 
-                for row in cursor:
-                    if row == data:
+                if fetched_data is None:
+                    print("INVALID DATA")
+                    return render_template("qr-code.html", someVariable="Invalid")
+                else:
+                    if fetched_data[0] == data:
                         print("data found: ", data)
-                        # cursor = mysql.connection.cursor()
-                        # cursor.execute("insert into registrants(name, sport) values (%s, %s) ", (data, data))
-                        # mysql.connection.commit()
-                        # cursor.close()
+                        cursor.close()
+                        return render_template("qr-code.html", someVariable=data)
 
 
-                mysql.connection.commit()
-                cursor.close()
 
-                return render_template("qr-code.html", someVariable=data)
-
-                # print("data found: ", data)
-                # # cursor = mysql.connection.cursor()
-                # # cursor.execute("insert into registrants(name, sport) values (%s, %s) ", (data, data))
-                # # mysql.connection.commit()
-                # # cursor.close()
-                # return render_template("qr-code.html", someVariable=data)
 
         # display the image preview
         cv2.imshow("code detector", img)
