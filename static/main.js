@@ -116,7 +116,7 @@ no.addEventListener('click',()=>{;toggle()} )
   */
 function snapping(){
       
-      toggle(this)
+      //toggle(this)
       terminal.innerHTML="I'm sending your mug to  Awesa...."
 
       setTimeout(function(){terminal.innerHTML=''}, 2000)

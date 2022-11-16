@@ -46,7 +46,7 @@
 
       <img id="empty_mug" name="img" alt="Display Picture" src="
     {{url_for('static',filename='images/placeholder_image.jpg')}}" />
-    
+
     <!---
     <div class='text-center' id="confirm-snap" hidden='hidden'>
       <h5>Retake Photo</h5>
@@ -55,12 +55,13 @@
       
     </div>
     --->
+   
 <div class="text-center" >
       <button type="button" class="btn btn-info" id="snap-button">Snap</button>
 
       </div>
       <div>
-        <textarea id="terminal" name="terminal" placeholder="$/" readonly></textarea>
+        <textarea id="terminal" name="terminal" placeholder="$:/" readonly></textarea>
       </div>
 
     </div>
@@ -78,6 +79,15 @@
        
 
 
+    </div>
+     <div class='text-center' >
+      <iframe
+    src="https://player.twitch.tv/?channel=ovishmovi&parent=localhost"
+    height="500px"
+    width="500px"
+    allowfullscreen='false'>
+</iframe>
+      
     </div>
   </div>
 </div>
