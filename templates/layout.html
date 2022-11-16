@@ -5,13 +5,58 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/style/ovi_block.css">
+     <link rel="stylesheet" href="/static/style/annas_block.css">
+<link rel="stylesheet" href="/static/style/siya_block.css">
+<link rel="stylesheet" href="/static/style/nathan_block.css">
+<link rel="stylesheet" href="/static/style/index.css">
 
     <title>Vision Security</title>
     <link rel="shortcut icon" href="#">
 </head>
 <body>
-    {% block content %}
-    {% endblock %}
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" href="#"><h3>Home</h3></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#"><h3>Development</h3></a>
+  </li>
+
+</ul>
+
+<div class="container" id="main-container">
+  <div class="row">
+    <div class="col-sm" id="annas">
+      <h2>Annas's Sensor</h2>
+    <h5>PIR</h5>
+    </div>
+
+    <div class="col-sm"id="nathan">
+      <h2>Nathans's Sensor</h2>
+        <h5>???</h5>
+    </div>
+
+    <div class="col-sm" id="ovidiu">
+
+      <h2>Ovidiu's Sensor</h2>
+      <h5>WEBCAM</h5>
+    </div>
+    <div class="col-sm" id="siya">
+      <h2>Siya's Sensor </h2>
+      <h5>QRCode</h5>
+        {% block content %}
+        {% endblock %}
+    </div>
+  </div>
+</div>
+
+  
  <script src="static/main.js"></script>
+ <script src="/static/pubnub.js" type="text/javascript" charset="utf-8" async defer></script>
+
+
 </body>
 </html>
