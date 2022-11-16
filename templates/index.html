@@ -3,16 +3,19 @@
 
 <h1>Register</h1>
    <form action="/register" method="post">
-       <input autocomplete="off" autofocus type="text"  name ="student_name" placeholder="Enter Name">
-       <input autocomplete="off" autofocus type="text"  name ="student_id" placeholder="Enter Student ID">
-       <input autocomplete="off" autofocus type="password"  name ="password" placeholder="Enter Password">
-       <input type="submit" value="Register">
+    <div class="form-group">
+        
+  
+       <input class="form-control" autocomplete="off" autofocus type="text"  name ="student_name" placeholder="Enter Name">
+       <input class="form-control" autocomplete="off" autofocus type="text"  name ="student_id" placeholder="Enter Student ID">
+       <input class="form-control" autocomplete="off" autofocus type="password"  name ="password" placeholder="Enter Password">
+       <input class="form-control" type="submit" value="Register">
     </form>
-
+  </div>
 <h1>OR</h1>
 
 <form method="GET" action="/qrgenerate" xmlns="http://www.w3.org/1999/html">
-      <button/>Scan</button>
+       <button type="submit" class="btn btn-primary">Scan</button>
 </form>
 
 
