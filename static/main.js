@@ -3,16 +3,17 @@
 
 
 
-//function qrcodeFunc(response){
-//    fetch('/qrcode')
-//      .then(response=>{
-//            console.log(response)
-//            return response
-//      })
-//      .then(responseStr=>{
-//            console.log(responseStr)
-//            document.getElementById("data_id").innerHTML = "Data Found";
-//      })
+function qrcodeFunc(response){
+    fetch('/qrcode')
+      .then(response=>{
+            console.log(response)
+            return response
+      })
+      .then(responseStr=>{
+            console.log(responseStr)
+            document.getElementById("data_id").innerHTML = "Data Found";
+      })
+      
 
 //    .then(response=>{
 //        if(response.ok){
