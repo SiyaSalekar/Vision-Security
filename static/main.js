@@ -1,7 +1,7 @@
 
 
 
-
+/*Siya ' s code for Camera QRCODE*/
 
 function qrcodeFunc(response){
     fetch('/qrcode')
@@ -13,7 +13,10 @@ function qrcodeFunc(response){
             console.log(responseStr)
             document.getElementById("data_id").innerHTML = "Data Found";
       })
-      
+/*
+
+Here ENDING Siya's Code
+*/ 
 
 //    .then(response=>{
 //        if(response.ok){
@@ -71,3 +74,17 @@ function qrcodeFunc(response){
 //	};
 //	await pubnub.publish(publishPayload);
 //}
+
+
+
+
+/*
+
+Ovidiu 's Code from here on....'
+*/
+
+
+
+/*
+Ovidiu's code ending here.
+*/
