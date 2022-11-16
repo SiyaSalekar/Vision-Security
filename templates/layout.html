@@ -43,18 +43,47 @@
 
       <h2>Ovidiu's Sensor</h2>
       <h5>WEBCAM</h5>
+
+      <img id="empty_mug" name="img" alt="Display Picture" src="
+    {{url_for('static',filename='images/placeholder_image.jpg')}}" />
+    
+    <!---
+    <div class='text-center' id="confirm-snap" hidden='hidden'>
+      <h5>Retake Photo</h5>
+      <button type="button" class="btn btn-info" id="yes-button">Yes</button>
+      <button type="button" class="btn btn-info" id="no-button">No</button>
+      
     </div>
+    --->
+<div class="text-center" >
+      <button type="button" class="btn btn-info" id="snap-button">Snap</button>
+
+      </div>
+      <div>
+        <textarea id="terminal" name="terminal" placeholder="$/" readonly></textarea>
+      </div>
+
+    </div>
+
+
+
+
+
     <div class="col-sm" id="siya">
       <h2>Siya's Sensor </h2>
       <h5>QRCode</h5>
+      
         {% block content %}
         {% endblock %}
+       
+
+
     </div>
   </div>
 </div>
 
   
- <script src="static/main.js"></script>
+ <script src="/static/main.js"></script>
  <script src="/static/pubnub.js" type="text/javascript" charset="utf-8" async defer></script>
 
 

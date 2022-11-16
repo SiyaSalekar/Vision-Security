@@ -3,6 +3,7 @@
 
 /*Siya ' s code for Camera QRCODE*/
 
+
 function qrcodeFunc(response){
     fetch('/qrcode')
       .then(response=>{
@@ -13,10 +14,10 @@ function qrcodeFunc(response){
             console.log(responseStr)
             document.getElementById("data_id").innerHTML = "Data Found";
       })
-/*
+}
 
-Here ENDING Siya's Code
-*/ 
+
+
 
 //    .then(response=>{
 //        if(response.ok){
@@ -76,15 +77,69 @@ Here ENDING Siya's Code
 //}
 
 
+/*
 
+Here ENDING Siya's Code
 
+*/ 
+///////////////////////////////////////////////////////////
 /*
 
 Ovidiu 's Code from here on....'
 */
 
+snap=document.getElementById('snap-button');
+snap.addEventListener('click',snapping );
+terminal=document.getElementById("terminal");
+/*
+confirm=document.getElementById('confirm-snap')
+yes=document.getElementById('yes-button')
+no=document.getElementById('no-button')
 
+yes.addEventListener('click', ()=>{snap.style.display='block';toggle(this)})
+
+no.addEventListener('click',()=>{;toggle()} )
+
+ let toggle = button=>{
+  
+    let hidden = confirm.getAttribute("hidden");
+
+    if (hidden) {
+       confirm.removeAttribute("hidden");
+      
+     
+    } else {
+       confirm.setAttribute("hidden", "hidden");
+       
+    }
+  }
+  */
+function snapping(){
+      
+      toggle(this)
+      terminal.innerHTML="I'm sending your mug to  Awesa...."
+
+      setTimeout(function(){terminal.innerHTML=''}, 2000)
+     
+     
+
+     
+
+}
 
 /*
 Ovidiu's code ending here.
+*/
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+
+Annas 's Code from here on....'
+*/
+
+
+
+/*
+Annas's code ending here.
 */
