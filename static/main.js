@@ -12,9 +12,8 @@ function qrcodeFunc(response){
       })
       .then(responseStr=>{
             console.log(responseStr)
-            document.getElementById("data_id").innerHTML = "Data Found";
-      })
-}
+            document.getElementById("data_id").innerHTML = responseStr;
+})
 
 
 

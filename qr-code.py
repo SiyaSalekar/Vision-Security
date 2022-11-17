@@ -71,7 +71,7 @@ def qrscan():
     while True:
         # get the image
         _, img = cap.read()
-        # get bounding box coords and data
+        # get bounding box co-ords and data
         data, bbox, _ = detector.detectAndDecode(img)
 
         # if there is a bounding box, draw one, along with the data
@@ -86,12 +86,14 @@ def qrscan():
 
                 if fetched_data is None:
                     print("INVALID DATA")
-                    return render_template("qr-code.html", someVariable="Invalid")
+                    return "Invalid"
+                    #return render_template("qr-code.html", someVariable="Invalid")
                 else:
                     if fetched_data[0] == data:
                         print("data Valid")
                         cursor.close()
-                        return render_template("qr-code.html", someVariable="Valid")
+                        return "Valid"
+                        #return render_template("qr-code.html", someVariable="Valid")
 
 
         # display the image preview
