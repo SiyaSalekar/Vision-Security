@@ -98,7 +98,7 @@ no=document.getElementById('no-button')
 
 yes.addEventListener('click', ()=>{snap.style.display='block';toggle(this)})
 
-no.addEventListener('click',()=>{;toggle()} )
+no.addEventListener('click',()=>{toggle()} )
 
  let toggle = button=>{
   
@@ -117,9 +117,11 @@ no.addEventListener('click',()=>{;toggle()} )
 function snapping(){
       
       //toggle(this)
-      terminal.innerHTML="I'm sending your mug to  Awesa...."
+      terminal.innerHTML="I'm sending your mug to  Awesa....\n All good dude/dudess :) !"
+      setTimeout(function(){terminal.innerHTML=''}, 4000)
+      
+     
 
-      setTimeout(function(){terminal.innerHTML=''}, 2000)
      
      
 
