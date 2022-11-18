@@ -1,13 +1,15 @@
+# Author : Siya
+
 import cv2
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, json
 import os
-from livereload import Server
 from flask_mysqldb import MySQL
 import bcrypt
 import qrcode
 
-
 app = Flask(__name__)
+
+data = {}
 
 # # database connect
 app.config['MYSQL'] = 'localhost'
@@ -18,7 +20,6 @@ app.config["MYSQL_DB"] = 'vision-security'
 mysql = MySQL(app)
 
 # database connect endRegion
-
 
 
 @app.route("/", methods = ["GET","POST"])
@@ -47,7 +48,7 @@ def register():
     qr.add_data(password_store)
     qr.make(fit=True)
     img = qr.make_image(fill_color='black', back_color='white')
-    img.save(f"templates/images/{name}.png")
+    img.save(f"static/images/{name}.png")
 
     if not student_id:
         return render_template("error.html", message="Invalid ID")
@@ -61,8 +62,7 @@ def register():
     return redirect("/")
 
 @app.route("/qrgenerate")
-def qrscan():
-    global data
+def qrgenerate():
     # set up camera object
     cap = cv2.VideoCapture(0)
 
@@ -72,27 +72,35 @@ def qrscan():
         # get the image
         _, img = cap.read()
         # get bounding box co-ords and data
-        data, bbox, _ = detector.detectAndDecode(img)
+
+        data['content'], bbox, _ = detector.detectAndDecode(img)
+        print(f"content is{data['content']}")
 
         # if there is a bounding box, draw one, along with the data
         if (bbox is not None):
 
-            cv2.putText(img, data, (int(bbox[0][0][0]), int(bbox[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
+            cv2.putText(img, data['content'], (int(bbox[0][0][0]), int(bbox[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
                         0.5, (0, 255, 0), 2)
-            if data:
+            if data['content']:
+                print(f"content is innn{data['content']}")
                 cursor = mysql.connection.cursor()
-                cursor.execute("select password from student where password = %s", [data])
+                cursor.execute("select password from student where password = %s", [data['content']])
                 fetched_data = cursor.fetchone()
 
                 if fetched_data is None:
-                    print("INVALID DATA")
-                    return "Invalid"
+                    data['Found'] = "false"
+                    parsed_json = json.dumps(data)
+                    print(f"content is{parsed_json}")
+                    return str(parsed_json)
+                    #return "Invalid"
                     #return render_template("qr-code.html", someVariable="Invalid")
                 else:
-                    if fetched_data[0] == data:
-                        print("data Valid")
+                    if fetched_data[0] == data['content']:
                         cursor.close()
-                        return "Valid"
+                        data['Found'] = "true"
+                        parsed_json = json.dumps(data)
+                        print(f"content is{parsed_json}")
+                        return str(parsed_json)
                         #return render_template("qr-code.html", someVariable="Valid")
 
 
@@ -107,12 +115,7 @@ def qrscan():
 
 
 
-
-
 if __name__ == '__main__':
-    #app.run(host='192.168.43.136',port=9000)
-    server = Server(app.wsgi_app)
-    server.serve()
-
+    app.run()
 
 

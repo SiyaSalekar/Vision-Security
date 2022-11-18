@@ -13,32 +13,35 @@
 <link rel="stylesheet" href="/static/style/nathan_block.css">
 <link rel="stylesheet" href="/static/style/index.css">
 
-    <script>https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.1.js</script>
-    <script>https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.1.min.js</script>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.1.js"></script>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.1.min.js"></script>
 
     <title>Vision Security</title>
     <link rel="shortcut icon" href="#">
 </head>
-<body>
+<body onload = "qrcodeFunc(); setupPubNub()">
+
+
+
   <div class="justify-content-start banner">
           
          
             <img class="text-left" style="max-width: 100%;
     max-height: 100%;"id="logo" name="img" alt="no logo" src="
-    {{url_for('static',filename='images/vision_security.png')}}" />
+            {{url_for('static',filename='images/vision_security.png')}}" />
 
-    <img  style="max-width: 100%;
+            <img  style="max-width: 100%;
     max-height: 100%;"id="logo" name="img" alt="no logo" src="
-    {{url_for('static',filename='images/raspberry.png')}}" />
+            {{url_for('static',filename='images/raspberry.png')}}" />
     
             
-    <ul class="nav justify-content-end" style="float:right;margin:30px">
-  <li class="nav-item">
-    <a class="nav-link active" href="#"><h3>Home</h3></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#"><h3>Development</h3></a>
-  </li>
+            <ul class="nav justify-content-end" style="float:right;margin:30px">
+            <li class="nav-item">
+            <a class="nav-link active" href="#"><h3>Home</h3></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#"><h3>Development</h3></a>
+            </li>
 
 </ul>      
 
@@ -87,29 +90,26 @@
 
 
 
-
-
     <div class="col-sm" id="siya"  style='margin-top: -10px;'>
       <h2>Siya's Sensor </h2>
       <h5>QRCode</h5>
+      <h1>Data : <p id="data_id">
+    </p></h1>
       
         {% block content %}
         {% endblock %}
-       
-
 
     </div>
 
 
 
-
      <div class='text-center' >
       <iframe
-    src="https://player.twitch.tv/?channel=ovishmovi&parent=localhost"
-    height="500px"
-    width="100%"
-    allowfullscreen='false'>
-</iframe>
+            src="https://player.twitch.tv/?channel=ovishmovi&parent=localhost"
+            height="500px"
+            width="100%"
+            allowfullscreen='false'>
+      </iframe>
       
     </div>
   </div>
@@ -118,7 +118,6 @@
   
  <script src="/static/main.js"></script>
  <script src="/static/pubnub.js" type="text/javascript" charset="utf-8" async defer></script>
-
 
 </body>
 </html>
