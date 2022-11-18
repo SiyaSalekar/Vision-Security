@@ -35,10 +35,15 @@ def register():
 
     student_id = request.form.get("student_id")
     name = request.form.get("student_name")
-    #convert passwd to bytes
+    if not student_id:
+        return render_template("error.html", message="Invalid ID")
+    if not name:
+        return render_template("error.html", message="Enter Name")
+
+    # convert passwd to bytes
     passwd = request.form.get("password").encode()
 
-    #hashing password
+    # hashing password
     password = bcrypt.hashpw(passwd, bcrypt.gensalt())
     password_store = str(password)
 
@@ -49,11 +54,6 @@ def register():
     qr.make(fit=True)
     img = qr.make_image(fill_color='black', back_color='white')
     img.save(f"static/images/{name}.png")
-
-    if not student_id:
-        return render_template("error.html", message="Invalid ID")
-    if not name:
-        return render_template("error.html", message="Enter Name")
 
     cursor = mysql.connection.cursor()
     cursor.execute("insert into student(name, student_id, password) values (%s, %s, %s) ", (name, student_id, password_store))
@@ -74,7 +74,6 @@ def qrgenerate():
         # get bounding box co-ords and data
 
         data['content'], bbox, _ = detector.detectAndDecode(img)
-        print(f"content is{data['content']}")
 
         # if there is a bounding box, draw one, along with the data
         if (bbox is not None):
@@ -82,7 +81,7 @@ def qrgenerate():
             cv2.putText(img, data['content'], (int(bbox[0][0][0]), int(bbox[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
                         0.5, (0, 255, 0), 2)
             if data['content']:
-                print(f"content is innn{data['content']}")
+
                 cursor = mysql.connection.cursor()
                 cursor.execute("select password from student where password = %s", [data['content']])
                 fetched_data = cursor.fetchone()
@@ -90,7 +89,6 @@ def qrgenerate():
                 if fetched_data is None:
                     data['Found'] = "false"
                     parsed_json = json.dumps(data)
-                    print(f"content is{parsed_json}")
                     return str(parsed_json)
                     #return "Invalid"
                     #return render_template("qr-code.html", someVariable="Invalid")
@@ -99,7 +97,6 @@ def qrgenerate():
                         cursor.close()
                         data['Found'] = "true"
                         parsed_json = json.dumps(data)
-                        print(f"content is{parsed_json}")
                         return str(parsed_json)
                         #return render_template("qr-code.html", someVariable="Valid")
 
