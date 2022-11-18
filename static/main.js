@@ -15,10 +15,13 @@ function qrcodeFunc(){
 	})
 	.then(responseJson => {
 		if(responseJson.Found == "true"){
+		    console.log("calling publish")
+		    publishMessage("Valid");
 			document.getElementById("data_id").innerHTML = "Valid";
 		}
 		else
 		{
+		    publishMessage("Invalid");
 			document.getElementById("data_id").innerHTML = "Invalid";
 		}
 
@@ -36,7 +39,7 @@ const setupPubNub = ()=>{
 			"pub-c-7b7bf3ef-a5df-4ec8-9bb2-f70cc90f6c86",
 		subscribeKey:
 			"sub-c-babca055-8ae8-4cbb-87e3-d1927bc7826a",
-		userID:"siyas-machine"
+		userId:"siyas-machine"
 	});
 	const listener ={
 		status:(statusEvent)=>{
