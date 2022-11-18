@@ -1,5 +1,5 @@
 import cv2
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, json
 import os
 import mysql.connector
 import bcrypt
@@ -14,19 +14,19 @@ from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
 
 myChannel = 'siyas-channel'
-sensorsList = ["cam"]
+sensorsList = ["led"]
 dataD = {}
+data = {}
 
 pnconfig = PNConfiguration()
-
-pnconfig.subscribe_key = ''
-pnconfig.publish_key = ''
+pnconfig.subscribe_key = "sub-c-babca055-8ae8-4cbb-87e3-d1927bc7826a"
+pnconfig.publish_key = "pub-c-7b7bf3ef-a5df-4ec8-9bb2-f70cc90f6c86"
 pnconfig.user_id = "siyas-machine"
 pubnub = PubNub(pnconfig)
 
 app = Flask(__name__)
 
-# # database connect
+# database connect
 mydb = mysql.connector.connect(
     host='localhost',
     user='root',
@@ -50,6 +50,11 @@ def index():
 def register():
     student_id = request.form.get("student_id")
     name = request.form.get("student_name")
+    if not student_id:
+        return render_template("error.html", message="Invalid ID")
+    if not name:
+        return render_template("error.html", message="Enter Name")
+
     # convert passwd to bytes
     passwd = request.form.get("password").encode()
 
@@ -63,12 +68,8 @@ def register():
     qr.add_data(password_store)
     qr.make(fit=True)
     img = qr.make_image(fill_color='black', back_color='white')
-    img.save(f"templates/images/{name}.png")
+    img.save(f"static/images/{name}.png")
 
-    if not student_id:
-        return render_template("error.html", message="Invalid ID")
-    if not name:
-        return render_template("error.html", message="Enter Name")
     mycursor = mydb.cursor()
     mycursor.execute("insert into student(name, student_id, password) values (%s, %s, %s) ",
                      (name, student_id, password_store))
@@ -78,11 +79,11 @@ def register():
 
 
 @app.route("/qrgenerate")
-def qrscan():
+def qrgenerate():
     dataD["alarm"] = False
     trigger = False
     # set up camera object
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(-1)
 
     # QR code detection object
     detector = cv2.QRCodeDetector()
@@ -90,24 +91,25 @@ def qrscan():
         # get the image
         _, img = cap.read()
         # get bounding box coords and data
-        data, bbox, _ = detector.detectAndDecode(img)
+        data['content'], bbox, _ = detector.detectAndDecode(img)
 
         # if there is a bounding box, draw one, along with the data
         if (bbox is not None):
 
-            cv2.putText(img, data, (int(bbox[0][0][0]), int(bbox[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
+            cv2.putText(img, data['content'], (int(bbox[0][0][0]), int(bbox[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
                         0.5, (0, 255, 0), 2)
-            if data:
+            if data['content']:
                 mycursor = mydb.cursor()
-                mycursor.execute("select password from student where password = %s", [data])
+                mycursor.execute("select password from student where password = %s", [data['content']])
                 fetched_data = mycursor.fetchone()
 
                 if fetched_data is None:
-                    print("INVALID DATA")
+                    data['Found'] = "false"
+                    parsed_json = json.dumps(data)
                     publish(myChannel, {"Data": "Invalid"})
-                    return render_template("qr-code.html", someVariable="Invalid")
+                    return str(parsed_json)
                 else:
-                    if fetched_data[0] == data:
+                    if fetched_data[0] == data['content']:
                         print("data Valid")
                         # LED setup
                         GPIO.setmode(GPIO.BOARD)
@@ -124,7 +126,9 @@ def qrscan():
 
                         GPIO.cleanup()
                         mycursor.close()
-                        return render_template("qr-code.html", someVariable="Valid")
+                        data['Found'] = "true"
+                        parsed_json = json.dumps(data)
+                        return str(parsed_json)
 
         # display the image preview
         cv2.imshow("code detector", img)
@@ -153,6 +157,7 @@ def my_publish_callback(envelope, status):
 
 
 class MySubscribeCallback(SubscribeCallback):
+
     def presence(self, pubnub, presence):
         pass  # handle incoming presence data
 
@@ -201,7 +206,6 @@ class MySubscribeCallback(SubscribeCallback):
 pubnub.add_listener(MySubscribeCallback())
 pubnub.subscribe().channels(myChannel).execute()
 
-
 if __name__ == '__main__':
     app.run(host='192.168.43.136', port=9000)
     pubnub.add_listener(MySubscribeCallback())
@@ -209,6 +213,7 @@ if __name__ == '__main__':
 
     # server = Server(app.wsgi_app)
     # server.serve()
+
 
 
 
