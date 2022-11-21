@@ -35,6 +35,6 @@ CREATE TABLE student_access_log(s_id int NOT NULL,
 			PRIMARY KEY (s_id),
 			FOREIGN KEY (student_id) REFERENCES student(student_id));
 
-#QR CODE Queries
+#QR CODE queries
 insert into student(student_number, student_email, student_password, course_end_date) values (%s, %s, %s, %s)
 select student_password from student where student_password = %s
