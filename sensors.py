@@ -20,9 +20,9 @@ import os
 
 #PubnuBconfiguration publish key /subscribe key and unique ID
 pnconfig = PNConfiguration()
-pnconfig.subscribe_key = 'sub-c-af22249a-f784-4ef2-b38f-8515e37d174e'
-pnconfig.publish_key = 'pub-c-dc785617-6b97-4cd5-94a4-fdb7c4807921'
-pnconfig.user_id = "a75ca08c-683b-11ed-9022-0242ac120002"
+pnconfig.subscribe_key = 'ovi's subscribe key
+pnconfig.publish_key = 'ovi s publish key'
+pnconfig.user_id = "unique id generated online"
 pubnub = PubNub(pnconfig)
 
 #location of snapshots taken from webcam
