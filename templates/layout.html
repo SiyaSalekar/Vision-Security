@@ -49,27 +49,33 @@
 </div>
 
 
-<div class="container" id="main-container">
+<div class="container" >
 
 
-  <div class="row">
 
-    <div class="col-sm" id="annas" style='margin-top: 25px;'>
-      <h2>Annas's Sensor</h2>
+
+    <div class="col" id="annas" >
+        <div class="text-center" >
+      <h2>Annas' Sensor</h2>
+    </div>
     <h5>PIR</h5>
     </div>
 
-    <div class="col-sm"id="nathan" style='margin-top: -25px;'>
-      <h2>Nathans's Sensor</h2>
-        <h5>???</h5>
-    </div>
-
-    <div class="col-sm" id="ovidiu"  style='margin-top: 40px;'>
-
+  
+<div class="container" >
+    <div class="col" id="ovidiu"  >
+  <div class="text-center" >
       <h2>Ovidiu's Sensor</h2>
-      <h5>WEBCAM</h5>
+    </div>
+      <div class='row'>
+        <div class='col-sm sensors_o' id='webcam_container'>
+          
+      
+        
+      
+      <h5  class="text-center">WEBCAM</h5>
 
-      <img id="empty_mug" name="img" alt="Display Picture" src="
+      <img  class="mx-auto d-block" id="empty_mug" name="img" alt="Display Picture" src="
     {{url_for('static',filename='images/placeholder_image.jpg')}}" />
 
     <!---
@@ -84,14 +90,32 @@
       <button type="button" class="btn btn-info" id="snap-button">Snap</button>
 
       </div>
-      <div>
-        <textarea id="terminal"  rows='4' name="terminal" placeholder="$:/" readonly></textarea>
+        </div>
+            <div class='col-sm sensors_o'  id='ultrasound_container'>
+              <h5  class="text-center" >ULTRASOUND</h5>
+                <img   name="img" alt="Display Picture" src="
+    {{url_for('static',filename='images/ultra_sound.jpg')}}" />
+    <ul>
+      <li> <button  type="button" class="btn btn-primary" type="">Trigger Ultrasound</button></li>
+      <li><button  type="button" class="btn btn-warning" type="">Stop ultrasound</button></li>
+    </ul>
+          
       </div>
+      <div class='col-sm sensors_o'  >
+          <div>
+        <textarea id="terminal"  rows='10' name="terminal" placeholder="$:/" readonly></textarea>
+      </div>
+      </div>
+      </div>
+    
     </div>
+  </div>
 
-
-    <div class="col-sm" id="siya"  style='margin-top: -10px;'>
+<div class="container" >
+    <div class="col" id="siya" >
+        <div class="text-center" >
       <h2>Siya's Sensor </h2>
+    </div>
       <h5>QRCode</h5>
         {% block content %}
         {% endblock %}
@@ -101,16 +125,16 @@
 
 
 
-     <div class='text-center' >
+<!--      <div class='text-center' >
 
       <iframe
             src="https://player.twitch.tv/?channel=ovishmovi&parent=localhost"
             height="500px"
             width="100%"
             allowfullscreen='false'>
-      </iframe>
+      </iframe> -->
       
-    </div>
+
 
   </div>
 
@@ -118,6 +142,7 @@
 
   
  <script src="/static/main.js"></script>
+  <script src="/static/main_ovi.js"></script>
  <script src="/static/pubnub.js" type="text/javascript" charset="utf-8" async defer></script>
 
 </body>
