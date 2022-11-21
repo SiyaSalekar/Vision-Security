@@ -1,0 +1,20 @@
+
+
+
+//this file will handle messages of pubnub
+
+from pubnub.pnconfiguration import PNConfiguration
+from pubnub.pubnub import PubNub
+// FOR DEALING WITH .ENV FILE WHERE publish/subscribe key are stored
+from dotenv import load_dotenv
+
+load_dotenv()
+
+publish_key=os.getenv(PUBLISH_KEY)
+print(publish_key)
+// pnconfig = PNConfiguration()
+// pnconfig.publish_key = "myPublishKey"
+// pnconfig.subscribe_key = "mySubscribeKey"
+// pnconfig.uuid = "theClientUUID"
+
+// pubnub = PubNub(pnconfig)
