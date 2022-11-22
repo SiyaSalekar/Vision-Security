@@ -15,7 +15,7 @@ data = {}
 app.config['MYSQL'] = 'localhost'
 app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
 app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
-app.config["MYSQL_DB"] = 'vision-security'
+app.config["MYSQL_DB"] = 'vision_security'
 
 mysql = MySQL(app)
 
@@ -34,11 +34,14 @@ def index():
 def register():
 
     student_id = request.form.get("student_id")
-    name = request.form.get("student_name")
+    email = request.form.get("student_email")
+    end_date = request.form.get("end_date")
     if not student_id:
         return render_template("error.html", message="Invalid ID")
-    if not name:
-        return render_template("error.html", message="Enter Name")
+    if not email:
+        return render_template("error.html", message="Invalid Email")
+    if not end_date:
+        return render_template("error.html", message="Invalid End Date")
 
     # convert passwd to bytes
     passwd = request.form.get("password").encode()
@@ -53,10 +56,10 @@ def register():
     qr.add_data(password_store)
     qr.make(fit=True)
     img = qr.make_image(fill_color='black', back_color='white')
-    img.save(f"static/images/{name}.png")
+    img.save(f"static/images/{student_id}.png")
 
     cursor = mysql.connection.cursor()
-    cursor.execute("insert into student(name, student_id, password) values (%s, %s, %s) ", (name, student_id, password_store))
+    cursor.execute("insert into student(student_number, student_email, student_password, course_end_date) values (%s, %s, %s, %s) ", (student_id, email, password_store, end_date))
     mysql.connection.commit()
     cursor.close()
     return redirect("/")
@@ -83,7 +86,7 @@ def qrgenerate():
             if data['content']:
 
                 cursor = mysql.connection.cursor()
-                cursor.execute("select password from student where password = %s", [data['content']])
+                cursor.execute("select student_password from student where student_password = %s", [data['content']])
                 fetched_data = cursor.fetchone()
 
                 if fetched_data is None:
