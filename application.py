@@ -73,56 +73,6 @@ def register():
     return redirect("/")
 
 
-@app.route("/qrgenerate")
-def qrgenerate():
-    # set up camera object
-    cap = cv2.VideoCapture(0)
-
-    # QR code detection object
-    detector = cv2.QRCodeDetector()
-    while True:
-        # get the image
-        _, img = cap.read()
-        # get bounding box co-ords and data
-
-        data['content'], bbox, _ = detector.detectAndDecode(img)
-
-        # if there is a bounding box, draw one, along with the data
-        if (bbox is not None):
-
-            cv2.putText(img, data['content'], (int(bbox[0][0][0]), int(bbox[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
-                        0.5, (0, 255, 0), 2)
-            if data['content']:
-
-                cursor = mysql.connection.cursor()
-                cursor.execute("select student_password from student where student_password = %s", [data['content']])
-                fetched_data = cursor.fetchone()
-
-                if fetched_data is None:
-                    data['Found'] = "false"
-                    parsed_json = json.dumps(data)
-                    return str(parsed_json)
-                    #return "Invalid"
-                    #return render_template("qr-code.html", someVariable="Invalid")
-                else:
-                    if fetched_data[0] == data['content']:
-                        cursor.close()
-                        data['Found'] = "true"
-                        parsed_json = json.dumps(data)
-                        return str(parsed_json)
-                        #return render_template("qr-code.html", someVariable="Valid")
-
-
-        # display the image preview
-        cv2.imshow("code detector", img)
-        if (cv2.waitKey(1) == ord("q")):
-            break
-
-    # free camera object and exit
-    cap.release()
-    cv2.destroyAllWindows()
-
-
 # -------End Siya's Code
 
 if __name__ == '__main__':
