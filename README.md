@@ -1,13 +1,10 @@
 # vision-security
 ###### secure access to student accommodation
-![alt text](https://ibb.co/zZ3dW1c)
-
+![](static/images/logo.jpeg)
 ======
-
-- ### *Scan QR codes*
-
-- ### *Facial Recognition*
-
-- ### *Ultrasound as a proximity sensor*
-
+- ### *Features*
+- - ### *Scan QR codes*
+- - ### *Facial Recognition*
+- - ### *Ultrasound as a proximity sensor*
 - ### *Hardware Diagram*
+![](static/images/fritzing_diagram.jpg)
