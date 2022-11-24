@@ -1,7 +1,6 @@
 # vision-security
 ![](static/images/logo.png)
-##### secure access to student accommodation
-======
+### secure access to student accommodation
 - ### *Features*
     - ### *Scan QR codes*
     - ### *Facial Recognition*
