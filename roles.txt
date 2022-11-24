@@ -6,11 +6,15 @@ Qr code generate, decode and scan
 PubNub Backend and frontend (for qrcodes)
 AWS Instance and domain setup
 obtain SSL cert
+database creation and queries
+hardware fritzing diagram
+
+Ovidiu's Role -
+Start Webcam
+UltraSound sensor
+Facial Recognition
+PubNub Backend (for Ultrasound sensor and facial recognition)
 
 Annas's Role -
 Motion Sensor
 
-Ovidiu's Role -
-UltraSound sensor
-Facial Recognition
-PubNub Backend (for Ultrasound sensor and facial recognition)
