@@ -1,0 +1,16 @@
+Siya's Role -
+register student
+hashing password
+Start webcam
+Qr code generate, decode and scan
+PubNub Backend and frontend (for qrcodes)
+AWS Instance and domain setup
+obtain SSL cert
+
+Annas's Role -
+Motion Sensor
+
+Ovidiu's Role -
+UltraSound sensor
+Facial Recognition
+PubNub Backend (for Ultrasound sensor and facial recognition)

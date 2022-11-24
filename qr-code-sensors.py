@@ -164,6 +164,8 @@ class MySubscribeCallback(SubscribeCallback):
                 cv2.putText(img, data['content'], (int(bbox[0][0][0]), int(bbox[0][0][1]) - 10),
                             cv2.FONT_HERSHEY_SIMPLEX,
                             0.5, (0, 255, 0), 2)
+                cv2.imshow("code detector", img)
+
                 if data['content']:
                     mycursor = mydb.cursor()
                     mycursor.execute("select student_password from student where student_password = %s",
@@ -171,9 +173,11 @@ class MySubscribeCallback(SubscribeCallback):
                     fetched_data = mycursor.fetchone()
 
                     if fetched_data is None:
+                        publish(myChannel, {"Data": "Invalid"})
                         data['Found'] = "false"
                         parsed_json = json.dumps(data)
-                        publish(myChannel, {"Data": "Invalid"})
+                        cap.release()
+                        cv2.destroyAllWindows("code detector")
                         return str(parsed_json)
                     else:
                         if fetched_data[0] == data['content']:
@@ -195,17 +199,9 @@ class MySubscribeCallback(SubscribeCallback):
                             mycursor.close()
                             data['Found'] = "true"
                             parsed_json = json.dumps(data)
-                            cv2.imshow("code detector", img)
+                            cap.release()
+                            cv2.destroyAllWindows("code detector")
                             return str(parsed_json)
-
-            # display the image preview
-            cv2.imshow("code detector", img)
-            if (cv2.waitKey(1) == ord("q")):
-                break
-
-        # free camera object and exit
-        cap.release()
-        cv2.destroyAllWindows()
 
 
 pubnub.add_listener(MySubscribeCallback())
