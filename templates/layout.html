@@ -13,13 +13,12 @@
     <link rel="stylesheet" href="/static/style/nathan_block.css">
     <link rel="stylesheet" href="/static/style/index.css">
 
-    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.1.js"></script>
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.1.min.js"></script>
 
     <title>Vision Security</title>
     <link rel="shortcut icon" href="#">
 </head>
-<body onload = "qrcodeFunc(); setupPubNub()">
+<body onload = "setupPubNub()">
 
 
 
@@ -92,9 +91,7 @@
     </div>
       <div class='row'>
         <div class='col-sm sensors_o' id='webcam_container'>
-          
-      
-        
+
       
       <h5  class="text-center">WEBCAM</h5>
 =======
@@ -147,32 +144,26 @@
     </div>
   </div>
 
+
 <div class="container" >
     <div class="col" id="siya" >
         <div class="text-center" >
       <h2>Siya's Sensor </h2>
     </div>
       <h5>QRCode</h5>
+        <div class="d-flex flex-row">
+            <div class='p-2'>
         {% block content %}
         {% endblock %}
-        <h2>Data : <p id="data_id"></p>
-        </h2>
+            </div>
+        <div class='p-2'>
+            <button class="btn btn-dark" type="button" id="siya-scan-btn" disabled>Scan</button>
+            <h2>Data : <p id="data_id"></p></h2>
+        </div>
+        </div>
     </div>
+</div>
 
-
-
-<!--      <div class='text-center' >
-
-      <iframe
-            src="https://player.twitch.tv/?channel=ovishmovi&parent=localhost"
-            height="500px"
-            width="100%"
-            allowfullscreen='false'>
-      </iframe> -->
-      
-
-
-  </div>
 
 </div>
 

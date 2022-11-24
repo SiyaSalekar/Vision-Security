@@ -6,6 +6,7 @@ Ovidiu 's Code from here on....'
 snap=document.getElementById('snap-button');
 snap.addEventListener('click',snapping );
 terminal=document.getElementById("terminal");
+
 /*
 confirm=document.getElementById('confirm-snap')
 yes=document.getElementById('yes-button')

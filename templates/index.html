@@ -1,23 +1,24 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h1>Register</h1>
+
   
  <div class="form-group">
+     <h1>Register</h1>
    <form action="/register" method="post">
-       <input class="form-control" autocomplete="off" autofocus type="text"  name ="student_email" placeholder="Enter Email">
+       <input style="width: 300px;" class="form-control" autocomplete="off" autofocus type="text"  name ="student_email" placeholder="Enter Email">
        <h6>Enter course End Date</h6>
-       <input class="form-control" autocomplete="off" autofocus type="date"  name ="end_date" placeholder="Enter Course End Date">
+       <input style="width: 300px;" class="form-control" autocomplete="off" autofocus type="date"  name ="end_date" placeholder="Enter Course End Date">
 
-       <input class="form-control" autocomplete="off" autofocus type="text"  name ="student_id" placeholder="Enter Student ID">
-       <input class="form-control" autocomplete="off" autofocus type="password"  name ="password" placeholder="Enter Password">
+       <input style="width: 300px;" class="form-control" autocomplete="off" autofocus type="text"  name ="student_id" placeholder="Enter Student ID">
+       <input style="width: 300px;" class="form-control" autocomplete="off" autofocus type="password"  name ="password" placeholder="Enter Password">
        <input class="btn btn-success" type="submit" value="Register">
     </form>
   </div>
-<h4>OR</h4>
-<form onload = "qrcodeFunc();">
-       <button class="btn btn-dark">Scan</button>
-</form>
+
+<!--<form onsubmit= "(e) => { e.preventDefault();}">-->
+    <!--   <button class="btn btn-dark" type="button" id="siya-scan-btn" disabled>Scan</button> -->
+<!--</form>-->
 
 
 
