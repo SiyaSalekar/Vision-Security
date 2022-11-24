@@ -128,7 +128,7 @@ class MySubscribeCallback(SubscribeCallback):
             if key[0] == "event":  # {"event":{"sensor_name":True}}
                 self.handleEvent(msg)
             if key[0] == "scan":
-                self.qrgenerate()
+                self.qr_validate()
         except Exception as e:
             print("Received: ", message.message)
             print(e)
@@ -144,7 +144,7 @@ class MySubscribeCallback(SubscribeCallback):
             if eventData[key[0]] is False:
                 dataD["alarm"] = False
 
-    def qrgenerate(self):
+    def qr_validate(self):
         dataD["alarm"] = False
         trigger = False
         # set up camera object
