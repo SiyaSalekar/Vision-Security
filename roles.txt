@@ -16,5 +16,8 @@ Facial Recognition
 PubNub Backend (for Ultrasound sensor and facial recognition)
 
 Annas's Role -
+trigger webcam to start when motion detected
 Motion Sensor
+PubNub Backend for motion sensor
+
 
