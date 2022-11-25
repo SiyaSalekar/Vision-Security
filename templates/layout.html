@@ -31,7 +31,7 @@
 
             <img  style="max-width: 100%;
     max-height: 100%;"id="logo" name="img" alt="no logo" src="
-<<<<<<< HEAD
+
     {{url_for('static',filename='images/raspberry.png')}}" />
 
    
@@ -51,8 +51,7 @@
     
   </li>
  -->
-=======
-            {{url_for('static',filename='images/raspberry.png')}}" />
+
     
             
             <ul class="nav justify-content-end" style="float:right;margin:30px">
@@ -63,7 +62,7 @@
             <a class="nav-link" href="#"><h3>Development</h3></a>
             </li>
 
->>>>>>> 390293134757426c178502bfeb1a1d05ee59bbeb
+
 </ul>      
 
 
@@ -82,8 +81,6 @@
     <h5>PIR</h5>
     </div>
 
-<<<<<<< HEAD
-  
 <div class="container" >
     <div class="col" id="ovidiu"  >
   <div class="text-center" >
@@ -91,24 +88,11 @@
     </div>
       <div class='row'>
         <div class='col-sm sensors_o' id='webcam_container'>
+          <h5  class="text-center">WEBCAM</h5>
 
-      
-      <h5  class="text-center">WEBCAM</h5>
-=======
-    <div class="col-sm"id="nathan" style='margin-top: -25px;'>
-      <h2>Nathans's Sensor</h2>
-        <h5>???</h5>
-    </div>
 
-    <div class="col-sm" id="ovidiu"  style='margin-top: 40px;'>
 
-      <h2>Ovidiu's Sensor
-      </h2>
-     
-      <h5>WEBCAM</h5>
->>>>>>> ovi1
-
-      <img  class="mx-auto d-block" id="empty_mug" name="img" alt="Display Picture" src="
+           <img  class="mx-auto d-block" id="empty_mug" name="img" alt="Display Picture" src="
     {{url_for('static',filename='images/placeholder_image.jpg')}}" />
 
     <!---
@@ -124,27 +108,30 @@
 
       </div>
         </div>
-            <div class='col-sm sensors_o'  id='ultrasound_container'>
+                <div class='col-sm sensors_o'  id='ultrasound_container'>
               <h5  class="text-center" >ULTRASOUND</h5>
                 <img   name="img" alt="Display Picture" src="
     {{url_for('static',filename='images/ultra_sound.jpg')}}" />
     <ul>
-      <li> <button  type="button" class="btn btn-primary" type="">Trigger Ultrasound</button></li>
-      <li><button  type="button" class="btn btn-warning" type="">Stop ultrasound</button></li>
+      <li> <button id="start_ultra_sound" type="button" class="btn btn-primary" type="">Trigger Ultrasound</button></li>
+    
     </ul>
           
       </div>
-      <div class='col-sm sensors_o'  >
+           <div class='col-sm sensors_o'  >
           <div>
         <textarea id="terminal"  rows='10' name="terminal" placeholder="$:/" readonly></textarea>
       </div>
       </div>
       </div>
-    
+
     </div>
   </div>
+ 
 
 
+  
+<!-- 
 <div class="container" >
     <div class="col" id="siya" >
         <div class="text-center" >
@@ -163,12 +150,12 @@
         </div>
     </div>
 </div>
-
+ -->
 
 </div>
 
   
- <script src="/static/main.js"></script>
+<!--  <script src="/static/main.js"></script> -->
   <script src="/static/main_ovi.js"></script>
  <script src="/static/pubnub.js" type="text/javascript" charset="utf-8" async defer></script>
 
