@@ -22,6 +22,7 @@ const setupPubNub = () => {
 		status:(statusEvent)=>{
 			if(statusEvent.category === "PNConnectedCategory"){
 				console.log("Connected to PubNub");
+				//action of scan Btn is valid only when PubNub is connected (enable here)
 				siyaScanButton.removeAttribute('disabled');
 			}
 		},
