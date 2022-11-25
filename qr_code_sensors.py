@@ -1,9 +1,6 @@
 import cv2
 from flask import Flask, render_template, request, redirect, json
-import os
 import mysql.connector
-import bcrypt
-import qrcode
 import RPi.GPIO as GPIO
 import time
 
@@ -15,7 +12,9 @@ from pubnub.pubnub import PubNub
 
 myChannel = 'siyas-channel'
 sensorsList = ["led"]
+# transmission PubNub
 dataD = {}
+# image
 data = {}
 
 pnconfig = PNConfiguration()
@@ -36,50 +35,6 @@ mydb = mysql.connector.connect(
 
 # database connect endRegion
 
-
-@app.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "GET":
-        return render_template("index.html")
-    elif request.method == "POST":
-        return render_template("greet.html", name=request.form.get("name", "World"))
-
-
-@app.route("/register",methods=["POST"])
-def register():
-
-    student_id = request.form.get("student_id")
-    email = request.form.get("student_email")
-    end_date = request.form.get("end_date")
-    if not student_id:
-        return render_template("error.html", message="Invalid ID")
-    if not email:
-        return render_template("error.html", message="Invalid Email")
-    if not end_date:
-        return render_template("error.html", message="Invalid End Date")
-
-    # convert passwd to bytes
-    passwd = request.form.get("password").encode()
-
-    # hashing password
-    password = bcrypt.hashpw(passwd, bcrypt.gensalt())
-    password_store = str(password)
-
-    qr = qrcode.QRCode(version=1,
-                       error_correction=qrcode.constants.ERROR_CORRECT_M,
-                       box_size=10, border=4)
-    qr.add_data(password_store)
-    qr.make(fit=True)
-    img = qr.make_image(fill_color='black', back_color='white')
-    img.save(f"static/images/{student_id}.png")
-    mycursor = mydb.cursor()
-    mycursor.execute("insert into student(student_number, student_email, student_password, course_end_date) values (%s, %s, %s, %s) ", (student_id, email, password_store, end_date))
-    mydb.commit()
-    mycursor.close()
-    return redirect("/")
-
-
-# pubnub code
 
 def publish(custom_channel, msg):
     pubnub.publish().channel(custom_channel).message(msg).pn_async(my_publish_callback)
@@ -146,7 +101,6 @@ class MySubscribeCallback(SubscribeCallback):
 
     def qr_validate(self):
         dataD["alarm"] = False
-        trigger = False
         # set up camera object
         cap = cv2.VideoCapture(-1)
 
@@ -173,12 +127,11 @@ class MySubscribeCallback(SubscribeCallback):
                     fetched_data = mycursor.fetchone()
 
                     if fetched_data is None:
-                        publish(myChannel, {"Data": "Invalid"})
+                        publish(myChannel, {"data": "invalid"})
                         data['Found'] = "false"
-                        parsed_json = json.dumps(data)
                         cap.release()
                         cv2.destroyAllWindows("code detector")
-                        return str(parsed_json)
+                        return
                     else:
                         if fetched_data[0] == data['content']:
                             print("data Valid")
@@ -192,20 +145,13 @@ class MySubscribeCallback(SubscribeCallback):
                                 time.sleep(0.5)
                                 GPIO.output(8, False)
                                 time.sleep(0.5)
-                            trigger = True
                             publish(myChannel, {"data": "valid"})
-
                             GPIO.cleanup()
                             mycursor.close()
                             data['Found'] = "true"
-                            parsed_json = json.dumps(data)
                             cap.release()
                             cv2.destroyAllWindows("code detector")
-                            return str(parsed_json)
-
-
-pubnub.add_listener(MySubscribeCallback())
-pubnub.subscribe().channels(myChannel).execute()
+                            return
 
 
 if __name__ == '__main__':

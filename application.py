@@ -1,4 +1,3 @@
-import cv2
 from flask import Flask, render_template, request, redirect, json
 import os
 from flask_mysqldb import MySQL
@@ -7,7 +6,6 @@ import qrcode
 
 app = Flask(__name__)
 
-data = {}
 
 # ----Begin Ovidiu's Code
 #this is path to images to  be used with flask and HTML.
@@ -35,16 +33,16 @@ def index():
     if request.method == "GET":
         return render_template("index.html")
     elif request.method == "POST":
-        return render_template("greet.html", name=request.form.get("name", "World"))
+        return render_template("greet.html")
 
 
 @app.route("/register",methods=["POST"])
 def register():
 
-    student_id = request.form.get("student_id")
+    student_number = request.form.get("student_id")
     email = request.form.get("student_email")
     end_date = request.form.get("end_date")
-    if not student_id:
+    if not student_number:
         return render_template("error.html", message="Invalid ID")
     if not email:
         return render_template("error.html", message="Invalid Email")
@@ -56,6 +54,7 @@ def register():
 
     # hashing password
     password = bcrypt.hashpw(passwd, bcrypt.gensalt())
+    # imp otherwise stores as bytes
     password_store = str(password)
 
     qr = qrcode.QRCode(version=1,
@@ -64,10 +63,10 @@ def register():
     qr.add_data(password_store)
     qr.make(fit=True)
     img = qr.make_image(fill_color='black', back_color='white')
-    img.save(f"static/images/{student_id}.png")
+    img.save(f"static/images/{student_number}.png")
 
     cursor = mysql.connection.cursor()
-    cursor.execute("insert into student(student_number, student_email, student_password, course_end_date) values (%s, %s, %s, %s) ", (student_id, email, password_store, end_date))
+    cursor.execute("insert into student(student_number, student_email, student_password, course_end_date) values (%s, %s, %s, %s) ", (student_number, email, password_store, end_date))
     mysql.connection.commit()
     cursor.close()
     return redirect("/")
