@@ -16,7 +16,7 @@ const setupPubNub = () => {
 			"pub-c-7b7bf3ef-a5df-4ec8-9bb2-f70cc90f6c86",
 		subscribeKey:
 			"sub-c-babca055-8ae8-4cbb-87e3-d1927bc7826a",
-		userId:"Jack-device"
+		userId:"Jack-device",
 	});
 	pubnub.addListener({
 		status:(statusEvent)=>{
