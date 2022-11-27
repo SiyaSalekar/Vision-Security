@@ -43,6 +43,22 @@ let pubnub;
     };
 
 
+motion_sensor_start=document.getElementById("motion_id");
+
+function handleClick(cb){
+	if(cb.checked){
+		value = "ON";
+	}else{
+		value = "OFF";
+	}
+	sendEvent(cb.id+"-"+value);
+}
+function sendEvent(value){
+	fetch("/status="+value,
+		{
+			method:"POST"
+		})
+}
 
 
 
