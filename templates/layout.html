@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/style/ovi_block.css">
@@ -12,6 +13,68 @@
     <link rel="stylesheet" href="/static/style/siya_block.css">
     <link rel="stylesheet" href="/static/style/nathan_block.css">
     <link rel="stylesheet" href="/static/style/index.css">
+    <style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+
 
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.1.min.js"></script>
 
@@ -70,16 +133,40 @@
 
 
 <div class="container" >
-
-
-
-
     <div class="col" id="annas" >
         <div class="text-center" >
       <h2>Annas' Sensor</h2>
     </div>
     <h5>PIR</h5>
+        <div class='row'>
+            <div class='col-sm sensors_o' id='webcam_container'>
+          <h5  class="text-center">Motion Sensor</h5>
+<div class="text-center" >
+      <label class="switch">
+  <input type="checkbox">
+  <span class="slider"></span>
+</label>
+   <img   name="img" alt="Display Picture" src="
+    {{url_for('static',filename='images/proximity_pirsensor.jpg')}}" />
+      </div>
+
+        </div>
+<div class='col-sm sensors_o'  id='startcamers'>
+              <h5  class="text-center" >Open Camera</h5>
+    <img   name="img" alt="Display Picture" src="
+    {{url_for('static',filename='images/webcam.jpg')}}" />
+
+
+      </div>
+
+        </div>
+        </div>
+
+
+
     </div>
+       </div>
+
 
 <div class="container" >
     <div class="col" id="ovidiu"  >
@@ -92,7 +179,7 @@
 
 
 
-           <img  class="mx-auto d-block" id="empty_mug" name="img" alt="Display Picture" src="
+           <img  class="mx-auto d-block" id="empty_mug" name="img" alt="camera Picture" src="
     {{url_for('static',filename='images/placeholder_image.jpg')}}" />
 
     <!---
