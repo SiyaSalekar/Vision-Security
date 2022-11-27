@@ -13,8 +13,7 @@ PIR_channel="PIR-channel"
 pnconfig = PNConfiguration()
 pnconfig.publish_key = "sub-c-babca055-8ae8-4cbb-87e3-d1927bc7826a"
 pnconfig.subscribe_key = "pub-c-7b7bf3ef-a5df-4ec8-9bb2-f70cc90f6c86"
-
-pnconfig.user_id = "unique id generated online"
+pnconfig.user_id = "khan-machine"
 pubnub = PubNub(pnconfig)
 
 
