@@ -51,7 +51,7 @@ def my_publish_callback(envelope, status):
 
 
 class MySubscribeCallback(SubscribeCallback):
-    
+
     def presence(self, pubnub, presence):
         pass  # handle incoming presence data
 
@@ -128,6 +128,7 @@ class MySubscribeCallback(SubscribeCallback):
 
                     if fetched_data is None:
                         publish(myChannel, {"data": "invalid"})
+                        beep(4)
                         data['Found'] = "false"
                         cap.release()
                         cv2.destroyAllWindows("code detector")
@@ -153,6 +154,14 @@ class MySubscribeCallback(SubscribeCallback):
                             cv2.destroyAllWindows("code detector")
                             return
 
+def beep(repeat):
+    for i in range(0, repeat):
+        for pulse in range(60):
+            GPIO.output(24, True)
+            time.sleep(0.001)
+            GPIO.output(24, False)
+            time.sleep(0.001)
+        time.sleep(0.02)
 
 if __name__ == '__main__':
     app.run(host='192.168.43.136', port=8080)
