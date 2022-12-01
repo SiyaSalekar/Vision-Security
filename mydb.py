@@ -3,6 +3,23 @@
 from flask_sqlalchemy import SQLAlchemy
 from .__init__ import db
 
+class DetailTable(db.Model):
+    __tablename__ = "student_register"
+    s_id = db.Column(db.Integer, primary_key=True)
+    student_number = db.Column(db.String(30))
+    student_password = db.Column(db.String(30))
+
+    # constructor
+    def __init__(self, student_number, student_password):
+        self.student_number = student_number
+        self.student_password = student_password
+
+
+def register_user(student_number, student_password):
+    new_user = DetailTable(student_number, student_password)
+    db.session.add(new_user)
+    db.session.commit()
+
 
 class UserTable(db.Model):
     __tablename__ = "student_login"
