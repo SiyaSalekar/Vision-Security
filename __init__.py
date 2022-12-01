@@ -101,10 +101,14 @@ def index():
 def register():
 
     student_number = request.form.get("student_number")
-    email = request.form.get("student_email")
+    student_pass = request.form.get("password")
+    if not student_number:
+        return render_template("error.html", message="ID not entered")
+    if not student_pass:
+        return render_template("error.html", message="Password not entered")
 
     # convert passwd to bytes
-    passwd = request.form.get("password").encode()
+    passwd = student_pass.encode()
 
     # hashing password
     password = bcrypt.hashpw(passwd, bcrypt.gensalt())
