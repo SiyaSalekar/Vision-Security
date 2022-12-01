@@ -1,12 +1,9 @@
-CREATE DATABASE `vision_security`;
+CREATE DATABASE `vision_sec`;
 
-CREATE TABLE student(student_id int NOT NULL AUTO_INCREMENT,
-             email VARCHAR(50),
-			 student_number VARCHAR(50) unique,
-			 student_password VARCHAR(100) unique,
-			 auth_key VARCHAR(150) unique,
-			 login INT,
-			 PRIMARY KEY (student_id));
+# gmail login
+CREATE TABLE student_login(student_id VARCHAR(250) NOT NULL, email VARCHAR(150), auth_key VARCHAR(150), login int, PRIMARY KEY (student_id));
+# register with student id
+CREATE TABLE student_register(s_id int NOT NULL AUTO_INCREMENT, student_number VARCHAR(150),student_password VARCHAR(100), PRIMARY KEY (s_id));
 
 
 #QR CODE queries
