@@ -9,7 +9,18 @@ input{
 
 .form-group{
 padding:60px;
+margin-left:500px;
+text-align: center;
 }
+
+.text-left-image{
+margin-left:500px;
+}
+
+.row{
+margin-left:500px;
+}
+
 
 .p-2{
 margin-left: 30px;

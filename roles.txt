@@ -8,6 +8,8 @@ AWS Instance and domain setup
 obtain SSL cert
 database creation and queries
 hardware fritzing diagram
+Gmail Login
+Database Integration AWS
 
 Ovidiu's Role -
 Start Webcam
