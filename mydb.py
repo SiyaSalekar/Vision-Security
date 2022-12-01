@@ -1,7 +1,6 @@
 # Database code - on AWS
-
-from flask_sqlalchemy import SQLAlchemy
 from .__init__ import db
+
 
 class DetailTable(db.Model):
     __tablename__ = "student_register"

@@ -1,9 +1,10 @@
 <div class="outer-div">
-
+<!-- Logo -->
 <img class="text-left" style="max-width: 100%;
     max-height: 100%; margin:50px" id="logo" name="img" alt="no logo" src="
             {{url_for('static',filename='images/vision_security.png')}}" />
 
+<!-- Register Student -->
  <div class="form-group">
      <h4>Register</h4>
    <form action="/register" method="post">
@@ -13,10 +14,8 @@
     </form>
   </div>
 
-
-<!--https://stackoverflow.com/questions/46654248/how-to-display-google-sign-in-button-using-html-->
-
-
+<!--Google Login -->
+    <!--https://stackoverflow.com/questions/46654248/how-to-display-google-sign-in-button-using-html-->
 <div class="row" style="margin-left:50px">
   <div class="col-md-3">
     <a class="btn btn-outline-dark" href="/login" role="button" style="text-transform:none">

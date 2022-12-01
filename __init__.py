@@ -1,9 +1,7 @@
-import cv2
 from flask import Flask, render_template, session, redirect, abort, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 import json
 import os
-from flask_mysqldb import MySQL
 import bcrypt
 import qrcode
 import pathlib
@@ -14,15 +12,16 @@ import google.auth.transport.requests
 import requests
 from . import mydb
 
+
 app = Flask(__name__)
 
-# DB
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Siya12345!@localhost/vision_sec'
+# DB Connect
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Siya12345!@localhost/vision_security'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+# Gmail Login Connect
 app.secret_key = "secret"
 GOOGLE_CLIENT_ID = "32339361886-h68qo4kbddtfncgup3cqcstngeeav5l5.apps.googleusercontent.com"
 clients_secret_file = os.path.join(pathlib.Path(__file__).parent,"client_secret.json")
@@ -32,9 +31,6 @@ flow = Flow.from_client_secrets_file(
     scopes=["https://www.googleapis.com/auth/userinfo.profile","https://www.googleapis.com/auth/userinfo.email","openid"],
     redirect_uri="https://visionsecurity.tk/callback"
 )
-
-
-data = {}
 
 # ----Begin Ovidiu's Code
 #this is path to images to  be used with flask and HTML.
@@ -46,8 +42,8 @@ app.config['UPLOAD_FOLDER'] = IMAGES
 placeholder_image=os.path.join(app.config['UPLOAD_FOLDER'], 'placeholder_image.jpg')
 # ----End Ovidiu's Code
 
-# --------Begin Siya's Code
 
+# --------Begin Siya's Code
 def login_required(function):
     def wrapper(*args, **kwargs):
         if "google_id" not in session:
@@ -56,11 +52,13 @@ def login_required(function):
             return function()
     return wrapper
 
+
 @app.route("/login")
 def login():
     authorization_url, state = flow.authorization_url()
     session["state"] = state
     return redirect(authorization_url)
+
 
 @app.route("/callback")
 def callback():
@@ -127,6 +125,7 @@ def register():
     return render_template("index.html")
 
 # -------End Siya's Code
+
 
 if __name__ == '__main__':
     app.run()
