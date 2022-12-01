@@ -1,39 +1,13 @@
 CREATE DATABASE `vision_security`;
 
 CREATE TABLE student(student_id int NOT NULL AUTO_INCREMENT,
-             student_email VARCHAR(50),
+             email VARCHAR(50),
 			 student_number VARCHAR(50) unique,
 			 student_password VARCHAR(100) unique,
-			 course_end_date date,
-			 student_image_url VARCHAR(150) unique,
+			 auth_key VARCHAR(150) unique,
+			 login INT,
 			 PRIMARY KEY (student_id));
 
-CREATE TABLE visitor(visitor_id int NOT NULL AUTO_INCREMENT,
-             visitor_email VARCHAR(50),
-			 visitor_image_url VARCHAR(150) unique,
-			 password VARCHAR(100) unique,
-			 PRIMARY KEY (visitor_id));
-
-CREATE TABLE student_visitor(id int NOT NULL,
-			student_id int NOT NULL,
-			visitor_id int NOT NULL,
-			valid_from datetime,
-			valid_to datetime,
-			PRIMARY KEY (id),
-			FOREIGN KEY (student_id) REFERENCES student(student_id),
-			FOREIGN KEY (visitor_id) REFERENCES visitor(visitor_id));
-
-CREATE TABLE visitor_access_log(v_id int NOT NULL,
-			visitor_id int,
-			accessed_on datetime,
-			PRIMARY KEY (v_id),
-			FOREIGN KEY (visitor_id) REFERENCES visitor(visitor_id));
-
-CREATE TABLE student_access_log(s_id int NOT NULL,
-			student_id int NOT NULL,
-			accessed_on datetime,
-			PRIMARY KEY (s_id),
-			FOREIGN KEY (student_id) REFERENCES student(student_id));
 
 #QR CODE queries
 insert into student(student_number, student_email, student_password, course_end_date) values (%s, %s, %s, %s)

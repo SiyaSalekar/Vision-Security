@@ -9,15 +9,17 @@ class UserTable(db.Model):
     student_id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(30))
     student_number = db.Column(db.String(30))
+    student_password = db.Column(db.String(30))
     auth_key = db.Column(db.String(255))
     login = db.Column(db.Integer)
 
     # constructor
-    def __init__(self, email, student_id, auth_key, login, student_number):
+    def __init__(self, email, student_id, auth_key, login, student_number, student_password):
         self.email = email
         self.student_id = student_id
         self.auth_key = auth_key
         self.student_number = student_number
+        self.student_password = student_password
         self.login = login
 
 
@@ -40,14 +42,14 @@ def get_user_row_if_exists(student_id):
         return False
 
 
-def add_user_and_login(email, student_id):
+def add_user_and_login(email, student_id, student_number, student_password):
     row = get_user_row_if_exists(student_id)
     if row is not False:
         row.login = 1
         db.session.commit()
     else:
         print("Adding Student "+email)
-        new_user = UserTable(email, student_id, student_number, None, 1)
+        new_user = UserTable(email, student_id, student_number, student_password, None, 1)
         db.session.add(new_user)
         db.session.commit()
 
