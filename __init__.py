@@ -47,15 +47,6 @@ placeholder_image=os.path.join(app.config['UPLOAD_FOLDER'], 'placeholder_image.j
 # ----End Ovidiu's Code
 
 # --------Begin Siya's Code
-# database connect
-# app.config['MYSQL'] = 'localhost'
-# app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
-# app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
-# app.config["MYSQL_DB"] = 'vision_security'
-#
-# mysql = MySQL(app)
-
-# database connect endRegion
 
 def login_required(function):
     def wrapper(*args, **kwargs):

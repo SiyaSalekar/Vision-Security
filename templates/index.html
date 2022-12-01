@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-  
+
  <div class="form-group">
      <h1>Register</h1>
    <form action="/register" method="post">
        <input style="width: 300px;" class="form-control" autocomplete="off" autofocus type="text"  name ="student_email" placeholder="Enter Email">
        <h6>Enter course End Date</h6>
        <input style="width: 300px;" class="form-control" autocomplete="off" autofocus type="date"  name ="end_date" placeholder="Enter Course End Date">
-       <input style="width: 300px;" class="form-control" autocomplete="off" autofocus type="text"  name ="student_id" placeholder="Enter Student ID">
+       <input style="width: 300px;" class="form-control" autocomplete="off" autofocus type="text"  name ="student_number" placeholder="Enter Student ID">
        <input style="width: 300px;" class="form-control" autocomplete="off" autofocus type="password"  name ="password" placeholder="Enter Password">
        <input class="btn btn-success" type="submit" value="Register">
     </form>

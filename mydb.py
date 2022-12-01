@@ -4,22 +4,36 @@ from flask_sqlalchemy import SQLAlchemy
 from .__init__ import db
 
 
-class UserTable(db.Model):
-    __tablename__ = "student"
-    student_id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(30))
+class DetailTable(db.Model):
+    __tablename__ = "student_register"
+    s_id = db.Column(db.Integer, primary_key=True)
     student_number = db.Column(db.String(30))
     student_password = db.Column(db.String(30))
+
+    # constructor
+    def __init__(self, student_number, student_password):
+        self.student_number = student_number
+        self.student_password = student_password
+
+
+def register_user(student_number, student_password):
+    new_user = DetailTable(student_number, student_password)
+    db.session.add(new_user)
+    db.session.commit()
+
+
+class UserTable(db.Model):
+    __tablename__ = "student_login"
+    student_id = db.Column(db.String(255), primary_key = True)
+    email = db.Column(db.String(30))
     auth_key = db.Column(db.String(255))
     login = db.Column(db.Integer)
 
     # constructor
-    def __init__(self, email, student_id, auth_key, login, student_number, student_password):
+    def __init__(self, email, student_id, auth_key, login):
         self.email = email
         self.student_id = student_id
         self.auth_key = auth_key
-        self.student_number = student_number
-        self.student_password = student_password
         self.login = login
 
 
@@ -42,14 +56,15 @@ def get_user_row_if_exists(student_id):
         return False
 
 
-def add_user_and_login(email, student_id, student_number, student_password):
+def add_user_and_login(email, student_id):
     row = get_user_row_if_exists(student_id)
     if row is not False:
         row.login = 1
         db.session.commit()
     else:
         print("Adding Student "+email)
-        new_user = UserTable(email, student_id, student_number, student_password, None, 1)
+
+        new_user = UserTable(email, student_id, None, 1)
         db.session.add(new_user)
         db.session.commit()
 
