@@ -7,6 +7,7 @@ PubNub Backend and frontend (for qrcodes)
 AWS Instance and domain setup
 obtain SSL cert
 database creation and queries
+Buzzer (invalid qr)
 hardware fritzing diagram
 Gmail Login
 Database Integration AWS

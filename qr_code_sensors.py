@@ -127,8 +127,19 @@ class MySubscribeCallback(SubscribeCallback):
                     fetched_data = mycursor.fetchone()
 
                     if fetched_data is None:
+                        # Buzzer setup
+                        GPIO.setwarnings(False)
+                        GPIO.setmode(GPIO.BOARD)
+                        GPIO.setup(10, GPIO.OUT)
+                        # control Buzzer when data received invalid- set output to HIGH
+                        for i in range(0, 6):
+                            for pulse in range(60):
+                                GPIO.output(10, True)
+                                time.sleep(0.001)
+                                GPIO.output(10, False)
+                                time.sleep(0.001)
+                            time.sleep(0.02)
                         publish(myChannel, {"data": "invalid"})
-                        beep(4)
                         data['Found'] = "false"
                         cap.release()
                         cv2.destroyAllWindows("code detector")
@@ -154,14 +165,7 @@ class MySubscribeCallback(SubscribeCallback):
                             cv2.destroyAllWindows("code detector")
                             return
 
-def beep(repeat):
-    for i in range(0, repeat):
-        for pulse in range(60):
-            GPIO.output(24, True)
-            time.sleep(0.001)
-            GPIO.output(24, False)
-            time.sleep(0.001)
-        time.sleep(0.02)
+
 
 if __name__ == '__main__':
     app.run(host='192.168.43.136', port=8080)
