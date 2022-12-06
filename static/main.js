@@ -59,6 +59,11 @@ const setupPubNub = () => {
 
     });
 };
+function logout()
+{
+console.log("Logging out")
+location.replace("/logout");
+}
 
 const publishMessage = async(message) =>{
 	const publishPayload = {

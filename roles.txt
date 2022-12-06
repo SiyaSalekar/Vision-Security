@@ -9,7 +9,7 @@ obtain SSL cert
 database creation and queries
 Buzzer (invalid qr)
 hardware fritzing diagram
-Gmail Login
+Gmail Login and logout
 Database Integration AWS
 
 Ovidiu's Role -
