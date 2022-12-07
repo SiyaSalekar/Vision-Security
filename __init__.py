@@ -1,7 +1,9 @@
+import cv2
 from flask import Flask, render_template, session, redirect, abort, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 import json
 import os
+from flask_mysqldb import MySQL
 import bcrypt
 import qrcode
 import pathlib
@@ -11,17 +13,17 @@ from pip._vendor import cachecontrol
 import google.auth.transport.requests
 import requests
 from . import mydb
-
+import smtplib
 
 app = Flask(__name__)
 
-# DB Connect
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Siya12345!@localhost/vision_security'
+# DB
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Siya12345!@localhost/vision_sec'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-# Gmail Login Connect
 app.secret_key = "secret"
 GOOGLE_CLIENT_ID = "32339361886-h68qo4kbddtfncgup3cqcstngeeav5l5.apps.googleusercontent.com"
 clients_secret_file = os.path.join(pathlib.Path(__file__).parent,"client_secret.json")
@@ -31,6 +33,12 @@ flow = Flow.from_client_secrets_file(
     scopes=["https://www.googleapis.com/auth/userinfo.profile","https://www.googleapis.com/auth/userinfo.email","openid"],
     redirect_uri="https://visionsecurity.tk/callback"
 )
+
+
+data = {}
+SES_MAIL_USERNAME = os.getenv("SES_MAIL_USERNAME")
+SES_MAIL_PASS = os.getenv("SES_MAIL_PASS")
+SES_ENDPOINT = os.getenv("SES_ENDPOINT")
 
 # ----Begin Ovidiu's Code
 #this is path to images to  be used with flask and HTML.
@@ -42,8 +50,17 @@ app.config['UPLOAD_FOLDER'] = IMAGES
 placeholder_image=os.path.join(app.config['UPLOAD_FOLDER'], 'placeholder_image.jpg')
 # ----End Ovidiu's Code
 
-
 # --------Begin Siya's Code
+# database connect
+# app.config['MYSQL'] = 'localhost'
+# app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
+# app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
+# app.config["MYSQL_DB"] = 'vision_security'
+#
+# mysql = MySQL(app)
+
+# database connect endRegion
+
 def login_required(function):
     def wrapper(*args, **kwargs):
         if "google_id" not in session:
@@ -52,13 +69,11 @@ def login_required(function):
             return function()
     return wrapper
 
-
 @app.route("/login")
 def login():
     authorization_url, state = flow.authorization_url()
     session["state"] = state
     return redirect(authorization_url)
-
 
 @app.route("/callback")
 def callback():
@@ -121,11 +136,17 @@ def register():
     img = qr.make_image(fill_color='black', back_color='white')
     img.save(f"var/www/FlaskApp/FlaskApp/static/images/{student_number}.png")
 
+    s = smtplib.SMTP(SES_ENDPOINT, 587)
+    s.connect(SES_ENDPOINT, 587)
+    s.starttls()
+    s.login(SES_MAIL_USERNAME,SES_MAIL_PASS)
+    msg = f"Dear Student, DO NOT SHARE WITH ANYONE\nUse the password to generate QRCode\npassword - {password_store}\nTHANK YOU"
+    s.sendmail("salekarsiya77@gmail.com", "salekarsiya77@gmail.com", msg)
+
     mydb.register_user(student_number, password_store)
     return render_template("index.html")
 
 # -------End Siya's Code
-
 
 if __name__ == '__main__':
     app.run()
