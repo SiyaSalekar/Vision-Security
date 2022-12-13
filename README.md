@@ -2,6 +2,7 @@
 ![](static/images/logo.png)
 ### secure access to student accommodation
 - ### *Features*
+  - ### *Motion Sensor*
     - ### *Scan QR codes*
     - ### *Facial Recognition*
   - ### *Ultrasound as a proximity sensor* 
