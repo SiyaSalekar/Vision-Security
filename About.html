@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>About Us</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="aboutus/about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/3.5.2/animate.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+   
+   <div class="animated lightSpeedIn">
+    <!-- Nav BAr STarts Here -->
+    <div id="nav_bar" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand" href="#">Vision Security</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse navbar-menubuilder">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="homepage.html">Home</a>
+                    </li>
+                    <li><a href="services.html">Services</a>
+                    </li>
+
+                    <li><a href="About.html">About Us</a>
+                    </li>
+                    <li><a href="Contactus.html">Contact Us</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h4 class="style_whatis">Know More About Us</h4>
+    <div class="container">
+        <div class="row  padding_color">
+            <div class="col-xs-5 col-md-5 col-lg-5 col-sm-5 img_url">
+            </div>
+
+            <div class="col-md-6 col-lg-6 about_padding">
+                <p>The Vision Security solution is a tool for student housing that enables Secure entry to rooms using facial recognition and QR code scanning.
+•We have created a programme for the Raspberry Pi that enables the motion sensor to activate the camera for QR code scanning and ultrasonic range detection for facial recognition.
+•With their student ID and a photo, students must register on the app before having their information entered into a database. The programme creates a QR code and emails it to the registered email address.
+</p>
+            </div>
+        </div>
+    </div> <br><br><br>
+    <div class="container about-2 hidden-custom">
+        <div class="row padding_color">
+
+
+            <div class="col-md-6 col-lg-6 about_padding">
+                <p>They are Great Progress Teams are aware of the significance of technological tasks including scalability, performance, and security. They may communicate the (business) value to their client and product owner, ensuring that it is included in the product backlog.Development team with their specific roles Annas work as frontend developer and hardware testing, Ovido is expert in intregration and testing part   ........, Siya has great database management skill and backend developer </a></p>
+            </div>
+            <div class="col-xs-5 col-md-5 col-lg-5 col-sm-5 img_url1">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid need-help hidden-custom">
+        <div class="row">
+           <div class="col-md-4"></div>
+            <div class="col-md-6">
+                <h2 class="help-head">Want Help?</h2>
+                <h1 class="sub-head-help"><a href="Contactus.html" class="sub-head-help-link">Get in touch with us...</a></h1>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="footer_bg">
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="col-md-4">
+                        <h3>About Us</h3>
+                       <p>We provide privacy of data to our user with easy user interface also help to keep their apartment save and secure
+                            A big thing for us, as product developer, is being able to empathize with our user.
+                        </p>
+                        <a href=""><i class="fa fa-facebook-square" style="font-size:40px"></i></a>
+                        <a href=""><i class="fa fa-google-plus-square" style="font-size:40px"></i></a>
+                        <a href=""><i class="fa fa-twitter-square" style="font-size:40px"></i></a>
+                        <a href=""><i class="fa fa-youtube-play" style="font-size:40px"></i></a>
+                    </div>
+                <div class="col-md-4">
+                    <h3>Quick Links</h3>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <p><a style="color:white;" href="homepage.html">&gt;  Home</a> </p>
+                                <p><a style="color:white;" href="Blog.html">&gt;  Blog</a> </p>
+                                <p><a style="color:white;" href="About.html">&gt;  About Us </a> </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><a style="color:white;" href="Contactus.html">&gt;  Contact US</a> </p>
+                                <p><a style="color:white;" href="services.html">&gt;  Services</a> </p>
+                                <p><a style="color:white;" href="products1.html">&gt;  Products</a> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+            </div>
+
+        </div>
+        <br><br><br>
+        
+        <div style="text-align:center;">
+           <h3> Designed And Developed By Team Vision Security  </h3>
+        </div>
+    </div>
+    
+</div>
+
+<script type="text/javascript">
+    
+    $(document).scroll(function() {
+       
+        if($(this).scrollTop() > 50) {
+            $(".about-2").removeClass('hidden-custom');
+            $(".about-2").addClass('animated fadeIn');
+        }
+        
+        if($(this).scrollTop() > 300) {
+            $(".need-help").removeClass('hidden-custom');
+            $(".need-help").addClass('animated flipInY');
+        }
+        
+    });
+    
+</script>
+
+
+</body>
+
+</html>
