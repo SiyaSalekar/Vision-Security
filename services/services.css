@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+/* Nav Bar Starts HEre */
+#nav_bar.navbar-default .navbar-brand {
+color: rgba(255, 255, 255, 1);
+}
+#nav_bar.navbar-default {
+font-size: 14px;
+background-color:forestgreen;
+border-bottom-width: 1px;
+}
+#nav_bar.navbar-default .navbar-nav>li>a {
+color: rgba(255, 255, 255, 1);
+background-color:forestgreen;
+}
+#nav_bar.navbar-default .navbar-nav>li>a:hover,
+#nav_bar.navbar-default .navbar-nav>li>a:focus {
+color: rgba(15, 15, 15, 1);
+background-color: rgba(255, 255, 255, 1);
+}
+#nav_bar.navbar-default .navbar-nav>.active>a,
+#nav_bar.navbar-default .navbar-nav>.active>a:hover,
+#nav_bar.navbar-default .navbar-nav>.active>a:focus {
+color: rgba(85, 85, 85, 1);
+background-color: rgba(231, 231, 231, 1);
+}
+#nav_bar.navbar-default .navbar-toggle {
+border-color: #ddd;
+}
+#nav_bar.navbar-default .navbar-toggle:hover,
+#nav_bar.navbar-default .navbar-toggle:focus {
+background-color: #ddd;
+}
+#nav_bar.navbar-default .navbar-toggle .icon-bar {
+background-color: #888;
+}
+#nav_bar.navbar-default .navbar-toggle:hover .icon-bar,
+#nav_bar.navbar-default .navbar-toggle:focus .icon-bar {
+background-color: #97c79f;
+}
+.page-head{
+font-family: 'Roboto Condensed',Sans serif;
+}
+.body{
+font-family: 'Roboto Condensed', sans serif;
+}
+.service-card:hover{
+-webkit-transition: all .2s ease;
+-moz-transition: all .2s ease;
+-ms-transition: all .2s ease;
+-o-transition: all .2s ease;
+transition: all .2s ease;
+border-top: 6px solid green;
+border-bottom: 6px solid green;
+box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2) ;
+padding-bottom: 200px;
+
+}
+.problem-anchor{
+    text-decoration: none;
+    color: black;
+    -webkit-transition: all .3s ease-in;
+       -moz-transition: all .3s ease-in;
+        -ms-transition: all .3s ease-in;
+         -o-transition: all .3s ease-in;
+            transition: all .3s ease-in;
+}
+.problem-anchor:hover{
+    text-decoration: none;
+    color: green;
+    -webkit-transition: all .3s ease-in;
+       -moz-transition: all .3s ease-in;
+        -ms-transition: all .3s ease-in;
+         -o-transition: all .3s ease-in;
+            transition: all .3s ease-in;
+}
+.service-card{
+-webkit-transition: all .2s ;
+    padding-bottom: 100px;
+-moz-transition: all .2s ease;
+-ms-transition: all .2s ease;
+-o-transition: all .2s ease;
+transition: all .2s ease;
+box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2);
+    height: 240px;
+    margin-bottom: 50px;
+    font-size: 20px;
+    margin-left: 50px;
+}
+.service-tabs img{
+width: 100%;
+}
+.footer_bg{
+background-image: url(footer.jpg);
+font-size: 15px;
+padding: 5px 20px 5px 20px;
+background-size: cover;
+font-family: 'Lora', serif;
+color: white;
+text-decoration: none;
+}
+i{
+color: white;
+}
+.text_color_white{
+color: white;
+}
+.text_color_white :hover{
+color: white;
+
+}
+.img_wood {
+background-image: url("footer.jpg")
+}
+@media screen and (max-width: 1100px) {
+     .first-card{
+            margin-left: 0px;
+            width: 950px;
+            -webkit-transform: translateX(-85px);
+               -moz-transform: translateX(-85px);
+                -ms-transform: translateX(-85px);
+                 -o-transform: translateX(-85px);
+                    transform: translateX(-85px);
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .service-card{
+        height: auto;
+    }
+}
+
+.first-card{
+    margin-left: 85px;
+}
+.nav-toggle{
+  text-align: center;
+  transition: 0.5s;
+  color: rgb(49, 181, 217);
+}
+.nav-toggle:hover{
+  transition: 0.5s;
+  color: rgb(18, 191, 41);
+  cursor: pointer;
+}
+.scrollToTop{
+    width:50px;
+    height:50px;
+    padding:15px;
+    text-align:center;
+    color: black;
+    background-color: black;
+    border-radius: 40px;
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+    position:fixed;
+    top:725px;
+    right:20px;
+    display:none;
+    transition: 0.3s;
+}
+.scrollToTop:hover{
+    text-decoration:none;
+    transition: 0.3s;
+    transform: scale(1.2);
+}
+.padder {
+  height: 820px;
+}

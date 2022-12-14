@@ -1,0 +1,303 @@
+body{
+background-color: whitesmoke;
+}
+
+/* Nav Bar Starts HEre */
+#nav_bar.navbar-default .navbar-brand {
+    color: rgba(255, 255, 255, 1);
+}
+#nav_bar.navbar-default {
+    font-size: 14px;
+    background-color:forestgreen;
+    border-bottom-width: 1px;
+}
+#nav_bar.navbar-default .navbar-nav>li>a {
+    color: rgba(255, 255, 255, 1);
+    background-color:forestgreen;
+}
+#nav_bar.navbar-default .navbar-nav>li>a:hover,
+#nav_bar.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(15, 15, 15, 1);
+    background-color: rgba(255, 255, 255, 1);
+}
+#nav_bar.navbar-default .navbar-nav>.active>a,
+#nav_bar.navbar-default .navbar-nav>.active>a:hover,
+#nav_bar.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(85, 85, 85, 1);
+    background-color: rgba(231, 231, 231, 1);
+}
+#nav_bar.navbar-default .navbar-toggle {
+    border-color: #ddd;
+}
+#nav_bar.navbar-default .navbar-toggle:hover,
+#nav_bar.navbar-default .navbar-toggle:focus {
+    background-color: #ddd;
+}
+#nav_bar.navbar-default .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+#nav_bar.navbar-default .navbar-toggle:hover .icon-bar,
+#nav_bar.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #97c79f;
+}
+
+/* Carousel */
+.slide1{
+  background-image: url('carousel1.jpg');
+  height: 500px;
+    
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.slide2{
+  background-image: url('footer.jpg');
+  height: 500px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.slide3{
+  background-image: url('footerbg1.jpg');
+  height: 500px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.carousel-caption h1{
+  font-size: 5.4em;
+  font-family: 'Lora', serif;
+  padding-bottom: .4em;
+}
+.carousel-caption p{
+  font-size: 2em;
+    font-family: 'Lora', serif;
+}
+.change{
+    font-family: 'Lora', serif;
+}
+
+/* Rectangle StartsHEre */
+
+/*Footer Starts HEre*/
+
+
+.footer_bg{
+background-image: url(footer.jpg);
+    
+    font-size: 15px;
+    padding: 5px 20px 5px 20px;
+    background-size: cover;
+    font-family: 'Lora', serif;
+    color: white;
+    text-decoration: none;
+}
+
+i{
+    color: white;
+}
+.text_color_white{
+    color: white;
+}
+.text_color_white :hover{
+    color: white;
+    
+}
+/* FOtter Ends Here */
+    .carousel-caption1{
+        padding: 10px;
+        font-size: 10px;
+    }
+.carousel-caption1 {
+ font-family: 'Lora', serif;
+    padding-bottom: 200px;
+    color: black;
+}
+.carousel-caption {
+ font-family: 'Lora', serif;
+    padding-bottom: 200px;
+   
+}
+/*  What Is it Starts Here */
+
+
+.style_whatis {
+    color: black;
+    text-shadow: 10px solid black;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 50px;
+    padding-bottom: 10px;
+}
+
+.img_url {
+   border-radius: 10px;     
+    min-height: 350px;
+    background-color: red;
+    margin: 20px 20px 20px 20px;
+    background-image: url(about.jpg);
+
+}
+
+.whatis{
+    -webkit-animation-duration: 5s;
+    -o-animation-duration: 5s;
+    animation-duration: 5s;
+}
+
+.hidden-whatis{
+  opacity: 0;
+}
+
+.about_padding {
+    margin-top: 20px;
+    font-size: 18px; 
+    color: black;   
+    padding-left: 50px;
+}
+
+
+@media (max-width: 600px) {
+  .about_padding {
+    padding-left: 10px;
+    padding-top: 0px;
+  }
+}
+
+/* 5 Boxes Starts Here */
+
+.big_box {
+    height: 200px;;
+    background-color:forestgreen;
+  /*  background-image: url(collage.jpg); */
+    color: white;
+    font-family: 'Lora', serif;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 600px) {
+  .big_box{
+    padding: 20px;font-size: 15px;
+  }
+  .sample-head{
+    text-align: center;
+  }
+}
+.first2_firstbox{
+background-color: lightseagreen;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 200px;
+    height: 50%;
+}
+.first2_secondbox{
+    background-color: black;
+    height: 50%;
+}
+.first2_box {
+    background-color: mediumseagreen;
+    height: 200px; 
+    }
+
+.two_box {
+    height: 200px; 
+   
+}
+
+.align_center_boxes {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 180px;
+}
+a{
+text-decoration: none;
+    
+    color: white;
+}
+a:hover{
+color: white;
+
+}
+a:active{
+    color: white;
+}
+
+.align_center_first2box {
+     vertical-align: middle;
+    text-align: center;
+    line-height: 70px;
+}
+
+.font_family_Macondo {
+    font-family: 'Lora', serif;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-shadow: 0 0 3px #000000;
+    
+}
+
+@media (max-width:1000px){
+    .big_box{
+        height: auto;
+    }
+}
+
+
+.info {
+  background-color: #118600;
+  padding: 40px;
+  color: white;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-weight: 1000;
+  font-size: 15px;
+}
+
+.icon-head{
+  font-size: 20px;
+}
+
+.info p {
+    text-align: center;
+}
+
+.2nd_firstbox {
+    background-color: green;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 200px;
+    height: 50%;
+}
+
+.family {
+    height: 300px;
+    background-image: url(Family.jpg);
+    margin-bottom: 50px;
+   
+    background-repeat: no-repeat;
+    
+     
+}
+
+.family_heading {
+    color: lawngreen;
+    padding: 10% 10% 10% 10%;
+}
+
+.sample_bogpost_heading {
+    padding-left: 10%;
+}
+
+
+p :hover{
+    text-decoration: none;
+}
+@media(max-width:550px){
+    .carousel-caption{
+        padding: 10px;
+        font-size: 10px;
+    }
+}
+.black {
+    color: black;
+}

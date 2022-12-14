@@ -1,0 +1,148 @@
+/* Nav Bar Starts HEre */
+#nav_bar.navbar-default .navbar-brand {
+    color: rgba(255, 255, 255, 1);
+}
+#nav_bar.navbar-default {
+    font-size: 14px;
+    background-color:forestgreen;
+    border-bottom-width: 1px;
+}
+#nav_bar.navbar-default .navbar-nav>li>a {
+    color: rgba(255, 255, 255, 1);
+    background-color:forestgreen;
+}
+#nav_bar.navbar-default .navbar-nav>li>a:hover,
+#nav_bar.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(15, 15, 15, 1);
+    background-color: rgba(255, 255, 255, 1);
+}
+#nav_bar.navbar-default .navbar-nav>.active>a,
+#nav_bar.navbar-default .navbar-nav>.active>a:hover,
+#nav_bar.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(85, 85, 85, 1);
+    background-color: rgba(231, 231, 231, 1);
+}
+#nav_bar.navbar-default .navbar-toggle {
+    border-color: #ddd;
+}
+#nav_bar.navbar-default .navbar-toggle:hover,
+#nav_bar.navbar-default .navbar-toggle:focus {
+    background-color: #ddd;
+}
+#nav_bar.navbar-default .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+#nav_bar.navbar-default .navbar-toggle:hover .icon-bar,
+#nav_bar.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #97c79f;
+}
+
+body{
+    background-color: whitesmoke;
+}
+.about_padding {
+    margin-top: 20px;
+    font-size: 22px;
+    color: black;   
+    padding-left: 50px;
+}
+.style_whatis {
+    color: black;
+    text-shadow: 10px solid black;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 50px;
+
+}
+.style_whatis2 {
+    color: black;
+    text-shadow: 10px solid black;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 11px;
+    padding-bottom: 10px;
+}
+.img_url1 {
+   border-radius: 10px;     
+    height: 250px;
+    background-color: red;
+    margin: 20px 20px 20px 20px;
+    background-image: url(about2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.img_url {
+   border-radius: 10px;     
+    height: 350px;
+    background-color: red;
+    margin: 20px 20px 20px 20px;
+    background-image: url(about.jpg);
+}
+
+.padding_color {
+    background-color: whitesmoke;
+    border: 2px solid gainsboro;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+/*Footer Starts HEre*/
+
+
+.footer_bg{
+background-image: url(footer.jpg);   
+    font-size: 15px;
+    padding: 5px 20px 5px 20px;
+    background-size: cover;
+    font-family: 'Lora', serif;
+    color: white;
+    text-decoration: none;
+}
+
+i{
+    color: white;
+}
+.text_color_white{
+    color: white;
+}
+.text_color_white :hover{
+    color: white;
+    
+}
+
+.need-help {
+    background-color: forestgreen;
+    height: 200px;
+    margin: 30px;
+    margin-bottom: 50px;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.help-head {
+    font-size: 40px;
+    padding-top: 20px;
+    padding-left: 10px;
+    
+}
+
+.sub-head-help-link{
+    text-decoration: none;
+    text-align: center;
+    transition: 0.5s;
+    color: white;
+}
+
+.sub-head-help-link:hover{
+    transition: 0.5s;
+    color: white;
+}
+
+.sub-head-help-link:focus{
+    color: white;
+    text-decoration: none;
+}
+
+.hidden-custom{
+    opacity: 0;
+}
