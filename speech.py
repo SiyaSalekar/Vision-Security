@@ -16,9 +16,8 @@ speak("Hello, Please Tell your Student Email ID and Name")
 
 recognizer = speech_recognition.Recognizer()
 with speech_recognition.Microphone() as source:
-    print("Say something")
+    print("Say student ID and Name ")
     audio = recognizer.listen(source)
 
 print("You said")
 print(recognizer.recognize_google(audio))
-print('Sorry.. run again...')

@@ -25,6 +25,7 @@ PubNub Backend for motion sensor
 help Siya in database creation and queries
 AWS Instance and domain setup
 design full front-end hosted on AWS
+addition feature for blind user (Speech.py)
 
 
 
