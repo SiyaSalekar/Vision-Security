@@ -131,8 +131,10 @@ i{
 }
 
 .img_url {
-   border-radius: 10px;     
-    min-height: 350px;
+    border-radius: 100%;
+    min-height: 209px;
+    width: 500px;
+    /*height: 203px;*/
     background-color: red;
     margin: 20px 20px 20px 20px;
     background-image: url(about.jpg);
